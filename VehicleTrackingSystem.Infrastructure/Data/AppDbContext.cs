@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using VehicleTrackingSystem.Application.Common.Interfaces;
 using VehicleTrackingSystem.Infrastructure.Identity;
 using VehicleTrackingSystem.Domain.Common;
+using VehicleTrackingSystem.Application.Common.Models;
+using VehicleTrackingSystem.Domain.Entities;
 
 namespace VehicleTrackingSystem.Infrastructure.Data
 {
@@ -32,8 +34,8 @@ namespace VehicleTrackingSystem.Infrastructure.Data
 
 
 
-        //public DbSet<RequestLoggerEntity> LoggerEntities { get; set; }
-        //public DbSet<UrlAction> UrlActions { get; set; }
+        public DbSet<RequestLoggerEntity> LoggerEntities { get; set; }
+        public DbSet<UrlAction> UrlActions { get; set; }
 
 
 

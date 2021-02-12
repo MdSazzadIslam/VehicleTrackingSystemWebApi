@@ -7,7 +7,7 @@ using System.Text;
 namespace VehicleTrackingSystem.Domain.Entities
 {
     [Table("FUEL_DETAIL")]
-    public class FuelDetail
+    public class Fuel
     {
         [Key]
         [Column("FUEL_DETAIL_ID")]
@@ -31,6 +31,6 @@ namespace VehicleTrackingSystem.Domain.Entities
         public double Amount { get; set; }
 
         [ForeignKey("VEHICLE_ID")]
-        public virtual VehicleInfo VehicleInfos { get; set; }
+        public virtual Vehicle VehicleInfos { get; set; }
     }
 }

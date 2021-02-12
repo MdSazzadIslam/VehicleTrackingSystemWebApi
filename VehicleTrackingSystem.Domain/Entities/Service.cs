@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VehicleTrackingSystem.Domain.Entities
 {
-    [Table("SERVICE_DETAIL")]
-    public class ServiceDetail
+    [Table("SERVICE")]
+    public class Service
     {
         [Key]
-        [Column("SERVICE_DETAIL_ID")]
+        [Column("SERVICE_ID")]
         public int ServiceDetailId { get; set; }
         //Foreign Key
         [Column("VEHICLE_ID")]
@@ -29,7 +29,7 @@ namespace VehicleTrackingSystem.Domain.Entities
         public double Amount { get; set; }
 
         [ForeignKey("VEHICLE_ID")]
-        public virtual VehicleInfo VehicleInfos { get; set; }
+        public virtual Vehicle VehicleInfos { get; set; }
 
     }
 }

@@ -68,7 +68,7 @@ namespace VehicleTrackingSystem.Domain.Entities
         public int? DeviceConnectionMessageId { get; set; }
 
         [ForeignKey("VEHICLE_ID")]
-        public virtual VehicleInfo VehicleInfos { get; set; }
-        public virtual DeviceInfo DeviceInfos { get; set; }
+        public virtual Vehicle VehicleInfos { get; set; }
+        public virtual Device DeviceInfos { get; set; }
     }
 }

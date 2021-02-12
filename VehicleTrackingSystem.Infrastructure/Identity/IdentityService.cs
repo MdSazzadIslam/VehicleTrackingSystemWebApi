@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using VehicleTrackingSystem.Application.Auth;
-using VehicleTrackingSystem.Application.Common.Email;
+
 
 using VehicleTrackingSystem.Application.Common.Interfaces;
 
@@ -43,23 +43,6 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
             _currentUserService = currentUserService;
         }
 
-        public async Task<Result> ChangePassword(ChangePasswordDto changePasswordDto)
-        {
-            var currentUserId = _currentUserService.UserId;
-            var authUser = await _context.Users.FirstOrDefaultAsync(x => x.Id == currentUserId && !x.Deleted);
-            if (authUser.ActiveStatus != "Y")
-            {
-                throw new UnauthorizedAccessException("User not active yet!!!");
-            }
-
-            if (authUser == null)
-                return (Result.Failure(new List<string> { "User Not Found!!" }));
-            var result = await _userManager.ChangePasswordAsync(authUser, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
-
-            return Result.Success("Successfully Changed..");
-        }
-
-    
         public async Task<Result> DeleteUser(string email)
         {
 

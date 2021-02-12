@@ -8,7 +8,7 @@ using VehicleTrackingSystem.Domain.Common;
 namespace VehicleTrackingSystem.Domain.Entities
 {
    [Table("VEHICLE_INFO")]
-    public class VehicleInfo : AuditableEntity
+    public class Vehicle : AuditableEntity
     {
         [Key]
         [Column("VEHICLE_ID")]

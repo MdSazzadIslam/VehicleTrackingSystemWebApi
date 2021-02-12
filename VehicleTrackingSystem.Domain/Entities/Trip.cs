@@ -8,11 +8,20 @@ using VehicleTrackingSystem.Domain.Common;
 namespace VehicleTrackingSystem.Domain.Entities
 {
     [Table("TRIP_INFO")]
-    public class TripInfo : AuditableEntity
+    public class Trip : AuditableEntity
     {
         [Key]
         [Column("TRIP_ID")]
         public int TripId { get; set; }
+
+        [Column("DRIVER_ID")]
+        public int DriverId { get; set; }
+
+        [Column("RIDER_ID")]
+        public int RiderId { get; set; }
+
+        [Column("VEHICLE_ID")]
+        public int VehicleId { get; set; }
 
         [Column("START_LOCATION")]
         public int StartLocationId { get; set; }
