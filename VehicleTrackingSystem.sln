@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.WebApi", "VehicleTrackingSystem.WebApi\VehicleTrackingSystem.WebApi.csproj", "{8750DD9A-6B16-48CD-8308-DD5C953BABD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.Domain", "VehicleTrackingSystem.Domain\VehicleTrackingSystem.Domain.csproj", "{4477F4CB-A389-48AF-8D71-EF31BA35F135}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8750DD9A-6B16-48CD-8308-DD5C953BABD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8750DD9A-6B16-48CD-8308-DD5C953BABD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8750DD9A-6B16-48CD-8308-DD5C953BABD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8750DD9A-6B16-48CD-8308-DD5C953BABD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82196F70-2C4E-481C-96AE-A19267B8FE9D}
+	EndGlobalSection
+EndGlobal
