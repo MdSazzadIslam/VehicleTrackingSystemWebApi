@@ -5,7 +5,7 @@ using VehicleTrackingSystem.Domain.Common;
 
 namespace VehicleTrackingSystem.Domain.Entities
 {
-    public class LogHistory : AuditEntity
+    public class LogHistory : AuditableEntity
     {
 
         public int Id { get; set; }
