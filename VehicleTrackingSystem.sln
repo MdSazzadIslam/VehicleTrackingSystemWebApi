@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.WebApi", "VehicleTrackingSystem.WebApi\VehicleTrackingSystem.WebApi.csproj", "{8750DD9A-6B16-48CD-8308-DD5C953BABD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleTrackingSystem.WebApi", "VehicleTrackingSystem.WebApi\VehicleTrackingSystem.WebApi.csproj", "{8750DD9A-6B16-48CD-8308-DD5C953BABD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.Domain", "VehicleTrackingSystem.Domain\VehicleTrackingSystem.Domain.csproj", "{4477F4CB-A389-48AF-8D71-EF31BA35F135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleTrackingSystem.Domain", "VehicleTrackingSystem.Domain\VehicleTrackingSystem.Domain.csproj", "{4477F4CB-A389-48AF-8D71-EF31BA35F135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.Infrastructure", "VehicleTrackingSystem.Infrastructure\VehicleTrackingSystem.Infrastructure.csproj", "{AB9292DB-847B-4767-A8C0-88AEEC647C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleTrackingSystem.Application", "VehicleTrackingSystem.Application\VehicleTrackingSystem.Application.csproj", "{1ADB77DD-1759-4DF1-82AA-DED193724178}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4477F4CB-A389-48AF-8D71-EF31BA35F135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9292DB-847B-4767-A8C0-88AEEC647C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9292DB-847B-4767-A8C0-88AEEC647C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9292DB-847B-4767-A8C0-88AEEC647C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9292DB-847B-4767-A8C0-88AEEC647C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADB77DD-1759-4DF1-82AA-DED193724178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADB77DD-1759-4DF1-82AA-DED193724178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADB77DD-1759-4DF1-82AA-DED193724178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADB77DD-1759-4DF1-82AA-DED193724178}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
