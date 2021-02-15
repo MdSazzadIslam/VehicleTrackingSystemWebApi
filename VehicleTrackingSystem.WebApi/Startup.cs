@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+
 using NSwag;
 using NSwag.Generation.Processors.Security;
+
 using VehicleTrackingSystem.Application.Common.Interfaces;
 using VehicleTrackingSystem.Application.IoC;
 using VehicleTrackingSystem.Infrastructure.IoC;
 using VehicleTrackingSystem.Infrastructure.Services;
+
 
 namespace VehicleTrackingSystem.WebApi
 {
@@ -29,8 +31,8 @@ namespace VehicleTrackingSystem.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
+            
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             services.AddApplication();
             services.AddInfrastructure(Configuration);
@@ -60,7 +62,9 @@ namespace VehicleTrackingSystem.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
- 
+
+            //app.UseCustomExceptionHandler();
+
             // Register the Swagger generator and the Swagger UI middlewares
 
             app.UseOpenApi(); // serve OpenAPI/Swagger documents

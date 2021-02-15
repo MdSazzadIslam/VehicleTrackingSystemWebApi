@@ -6,6 +6,7 @@ namespace VehicleTrackingSystem.Domain.Common
 {
     public class AuditableEntity
     {
+
         [Column("CREATE_BY")]
         public string CreatedBy { get; set; }
         [Column("CREATE_DATE")]
@@ -14,6 +15,7 @@ namespace VehicleTrackingSystem.Domain.Common
         public string UpdateBy { get; set; }
         [Column("UPDATE_DATE")]
         public DateTime UpdateDate { get; set; }
+        public string IpAddress { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ using VehicleTrackingSystem.Application.Auth;
 
 
 using VehicleTrackingSystem.Application.Common.Interfaces;
-
+using VehicleTrackingSystem.Domain.Enums;
 
 namespace VehicleTrackingSystem.Infrastructure.Identity
 { 
@@ -71,10 +71,6 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
                 if (checkUser != null)
                     return (Result.Failure(new List<string> { "User deleted!!!" }), checkUser.Id);
 
-
-                //var user = await _context.Users.FirstOrDefaultAsync(c => c.UserName == loginDto.UserName) ??
-                //           (await _userManager.FindByEmailAsync(loginDto.UserName) ?? await _userManager.FindByNameAsync(loginDto.UserName));
-
                 var user = await _context.Users.FirstOrDefaultAsync(c => c.Email == loginDto.Email) ??
                            (await _userManager.FindByEmailAsync(loginDto.Email) ?? await _userManager.FindByEmailAsync(loginDto.Email));
 
@@ -97,14 +93,13 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
                     ReturnDto appUser = new ReturnDto
                     {
                         Id = user.Id,
-                        UserName = user.UserName,
                         Email = user.Email,
-                        EmployeeId = user.EmployeeId,
                         PhoneNumber = user.PhoneNumber,
-                        SellerId = user.SellerId,
-                        VendorId = user.VendorId
-
-
+                        CountryCode = user.CountryCode,
+                        ActiveStatus = user.ActiveStatus,
+                        UserTypeId = user.UserTypeId,
+                        PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                        TwoFactorEnabled = user.TwoFactorEnabled
                     };
 
                     return new
@@ -124,58 +119,44 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
         {
 
             var checkUser = await _context.Users.FirstOrDefaultAsync(c => c.Email == registerDto.Email);
-
             if (checkUser != null)
-                return (Result.Failure(new List<string> { "Email already exist" }), checkUser.Id);
+                return (Result.Failure(new List<string> { "Email Already Exist" }), checkUser.Id);
 
-
-            if (registerDto.EmployeeId == null)
+            if (checkUser == null)
             {
-                registerDto.UserName = Guid.NewGuid().ToString();
-                string employeeId = Guid.NewGuid().ToString();
-                registerDto.EmployeeId = employeeId;
-                registerDto.ActiveStatus = "N";
-                registerDto.VendorId = 331;
-                registerDto.SellerId = 111;
-
                 var user = new User
                 {
-
+                    UserName= Guid.NewGuid().ToString(),
                     Email = registerDto.Email,
-                    UserName = registerDto.UserName,
-                    EmployeeId = registerDto.EmployeeId,
-                    UserTypeId = registerDto.UserTypeId,
-                    ActiveStatus = registerDto.ActiveStatus,
-                    SellerId = registerDto.SellerId,
-                    VendorId = registerDto.VendorId
-                };
+                    ActiveStatus = "Y",
+                    UserTypeId = 1
+            };
 
                 var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+                if (result.Succeeded)
+                {
+                    var userForRole = await _userManager.FindByNameAsync(user.UserName);
+                    await _userManager.AddToRolesAsync(userForRole, new[] { UsersRole.Admin.ToString() });
+                }
                 return (result.ToApplicationResult(), user.Id);
             }
             else
             {
-
-
-                return (Result.Failure(new List<string> { "something went wrong" }), checkUser.Id);
+                return (Result.Failure(new List<string> { "No User Found" }), checkUser.Id);
             }
+
         }
         private async Task<string> GenerateJwtToken(User user)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.SerialNumber, user.EmployeeId),
-                new Claim(ClaimTypes.PrimarySid, user.SellerId.ToString()),
-                new Claim(ClaimTypes.PrimaryGroupSid, user.VendorId.ToString())
+                new Claim(ClaimTypes.Email, user.Email),
+
             };
 
-            //if (!string.IsNullOrWhiteSpace(user.EmployeeId))
-            //{
-            //    claims.Add();
-            //}
-
+          
             var roles = await _userManager.GetRolesAsync(user);
 
             foreach (var role in roles)

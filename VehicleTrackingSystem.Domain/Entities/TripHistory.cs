@@ -11,16 +11,13 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
         [Key]
         [Column("TRIP_HISTORY_ID")]
-        public int TripHistoryId { get; set; }
-
-        //Foreign Key
-        [Column("TRIP_ID")]
-        public int TripId { get; set; }
+        public Int64 TripHistoryId { get; set; }
 
         [Column("LATITUDE")]
         public decimal Latitude { get; set; }
 
         [Column("LONGITUDE")]
+
         public decimal Longitude { get; set; }
 
         [Column("TRIP_DATE")]
@@ -35,13 +32,11 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("ALTITUDE")]
         public decimal? Altitude { get; set; }
 
-        [Column("DEVEICE_ID")]
-        public decimal? DeviceId { get; set; }
-
         [Column("SATELLITES")]
         public short? Satellites { get; set; }
 
         [Column("HDOP")]
+
         public decimal? HDOP { get; set; }
 
         [Column("POSITION_STATUS")]
@@ -67,8 +62,15 @@ namespace VehicleTrackingSystem.Domain.Entities
 
         public int? DeviceConnectionMessageId { get; set; }
 
-        [ForeignKey("VEHICLE_ID")]
-        public virtual Vehicle VehicleInfos { get; set; }
-        public virtual Device DeviceInfos { get; set; }
+        //Foreign Key
+        [Column("TRIP_REQUEST_ID")]
+        public Int64 TripRequestId { get; set; }
+        public virtual TripRequest TripRequest { get; set; }
+
+        //Foreign Key
+        [Column("DEVEICE_ID")]
+        public decimal DeviceId { get; set; }
+        public virtual Device Device { get; set; }
+
     }
 }

@@ -12,7 +12,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
         [Key]
         [Column("VEHICLE_ID")]
-        public int VehicleId { get; set; }
+        public Int64 VehicleId { get; set; }
 
         [Column("VEHICLE_NAME")]
         public string VehicleName { get; set; }
@@ -23,16 +23,19 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("MODEL_NO")]
         public string ModelNo { get; set; }
 
-        [Column("COLOR")]
-        public string Color { get; set; }
+        [Column("COLOR_CODE")]
+        public string ColorCode { get; set; }
 
         [Column("PRODUCTION_YEAR")]
-        public string ProductionYear { get; set; }
+        public int ProductionYear { get; set; }
 
-        [Column("COUNTRY_NAME")]
-        public string CountryName { get; set; }
+        [Column("COUNTRY_CODE")]
+        public string CountryCode { get; set; }
+
+        [Column("REMARKS")]
+        public string Remarks { get; set; }
 
         [Column("ACTIVE_STATUS")]
-        public string ActiveStatus { get; set; }
+        public char ActiveStatus { get; set; }
     }
 }

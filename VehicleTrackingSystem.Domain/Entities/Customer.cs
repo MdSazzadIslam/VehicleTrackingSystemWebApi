@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using VehicleTrackingSystem.Domain.Common;
 
 namespace VehicleTrackingSystem.Domain.Entities
 {
     [Table("RIDER")]
-    public class Rider
+    public class Customer : AuditableEntity
     {
         [Key]
-        [Column("RIDER_ID")]
-        public int RiderId { get; set; }
+        [Column("CUSTOMER_ID")]
+        public Int64 RiderId { get; set; }
 
-        [Column("RIDER_NAME")]
+        [Column("CUSTOMER_NAME")]
         public int RiderName { get; set; }
 
         [Column("JOINING_DATE")]
@@ -27,8 +28,8 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("GENDER_ID")]
         public int GENDER_ID { get; set; }
 
-        [Column("COUNTRY_ID")]
-        public int COUNTRY_ID { get; set; }
+        [Column("COUNTRY_CODE")]
+        public int COUNTRY_CODE { get; set; }
 
         [Column("CONTACT_NO")]
         public int ContactNo { get; set; }

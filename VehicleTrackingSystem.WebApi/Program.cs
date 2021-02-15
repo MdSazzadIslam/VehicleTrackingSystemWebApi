@@ -1,9 +1,13 @@
 using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
- 
+using VehicleTrackingSystem.Infrastructure.Data;
+using VehicleTrackingSystem.Infrastructure.Identity;
 
 namespace VehicleTrackingSystem.WebApi
 {
@@ -25,13 +29,13 @@ namespace VehicleTrackingSystem.WebApi
                 var services = scope.ServiceProvider;
                 try
                 {
-                    //var context = services.GetRequiredService<ApplicationDbContext>();
-                    //var userManager = services.GetRequiredService<UserManager<User>>();
-                    //var roleManager = services.GetRequiredService<RoleManager<Role>>();
-                    //var actionDescriptor = services.GetRequiredService<IActionDescriptorCollectionProvider>();
+                    var context = services.GetRequiredService<AppDbContext>();
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var roleManager = services.GetRequiredService<RoleManager<Role>>();
+                    var actionDescriptor = services.GetRequiredService<IActionDescriptorCollectionProvider>();
 
-                    //context.Database.Migrate();
-                    //Seed.SeedUsers(userManager, roleManager, actionDescriptor, context);
+                    context.Database.Migrate();
+                    Seed.SeedUsers(userManager, roleManager, actionDescriptor, context);
 
                 }
                 catch (Exception ex)

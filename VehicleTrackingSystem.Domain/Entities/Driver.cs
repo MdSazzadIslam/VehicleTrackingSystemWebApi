@@ -11,7 +11,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
         [Key]
         [Column("DRIVER_ID")]
-        public int DriverId { get; set; }
+        public Int64 DriverId { get; set; }
 
         [Column("DRIVER_NAME")]
         public string DriverName { get; set; }
@@ -19,6 +19,16 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("JOINING_DATE")]
         [DataType(DataType.Date)]
         public DateTime JoiningDate { get; set; }
+
+        [Column("DATE_OF_BIRTH")]
+        [DataType(DataType.Date)]
+        public int DateOfBirth { get; set; }
+
+        [Column("GENDER_ID")]
+        public int GENDER_ID { get; set; }
+
+        [Column("COUNTRY_CODE")]
+        public int COUNTRY_CODE { get; set; }
 
         [Column("CONTACT_NO")]
         public string ContactNo { get; set; }
@@ -29,8 +39,6 @@ namespace VehicleTrackingSystem.Domain.Entities
         //Foreign key
         [Column("VEHICLE_ID")]
         public int VehicleId { get; set; }
-
-        [ForeignKey("VEHICLE_ID")]
         public virtual Vehicle VehicleInfos { get; set; }
     }
 }

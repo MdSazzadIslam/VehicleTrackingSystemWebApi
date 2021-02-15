@@ -11,11 +11,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
         [Key]
         [Column("FUEL_DETAIL_ID")]
-        public int FuelDetailId { get; set; }
-
-        //Foreign Key
-        [Column("VEHICLE_ID")]
-        public int VehicleId { get; set; }
+        public Int64 FuelDetailId { get; set; }
 
         [Column("BILL_NO")]
         public int BillNo { get; set; }
@@ -30,7 +26,9 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("AMOUNT")]
         public double Amount { get; set; }
 
-        [ForeignKey("VEHICLE_ID")]
+        //Foreign Key
+        [Column("VEHICLE_ID")]
+        public int VehicleId { get; set; }
         public virtual Vehicle VehicleInfos { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace VehicleTrackingSystem.Infrastructure.Data
         {
             if (!userManager.Users.Any())
             {
-                // Create some roles
+                // Creating some roles
                 var roles = new List<Role>
                 {
                     new Role {Name = "Admin"},
-                    new Role {Name = "Employee"},
-                    new Role {Name = "Moderator"}
+                    new Role {Name = "Driver"},
+                    new Role {Name = "Customer"}
                 };
 
                 foreach (var role in roles)
@@ -29,14 +29,20 @@ namespace VehicleTrackingSystem.Infrastructure.Data
                     roleManager.CreateAsync(role).Wait();
                 }
 
-                //Create admin user
+                //Creating admin user
                 var adminUser = new User
                 {
                     UserName = "Admin",
-                    EmployeeId = "01-25-01-001"
+                    UserTypeId=1, //1 indicate as an administrator user 
+                    CountryCode="BD",
+                    Email="netsazzad@gmail.com",
+                    PhoneNumber="01722536673",
+                    ActiveStatus="Y",
+
+                    
                 };
 
-                var result = userManager.CreateAsync(adminUser, "admin").Result;
+                var result = userManager.CreateAsync(adminUser, "Admin").Result;
 
                 if (result.Succeeded)
                 {

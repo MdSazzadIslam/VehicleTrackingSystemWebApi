@@ -22,8 +22,6 @@ namespace VehicleTrackingSystem.Infrastructure.Data
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
 
-
-
         public AppDbContext(DbContextOptions<AppDbContext> options,
             ICurrentUserService currentUserService,
             IDateTime dateTime) : base(options)
@@ -33,12 +31,18 @@ namespace VehicleTrackingSystem.Infrastructure.Data
         }
 
 
-
         public DbSet<RequestLoggerEntity> LoggerEntities { get; set; }
         public DbSet<UrlAction> UrlActions { get; set; }
 
-
-
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Device> Device { get; set; }
+        public DbSet<Driver> Driver { get; set; }
+        public DbSet<Fuel> Fuel { get; set; }
+        public DbSet<LogHistory> LogHistory { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<TripRequest> Trip { get; set; }
+        public DbSet<TripHistory> TripHistory { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

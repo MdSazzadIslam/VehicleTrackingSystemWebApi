@@ -7,11 +7,7 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
 {
     public class User : IdentityUser<int>
     {
-        public string EmployeeId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int VendorId { get; set; }
-        public int SellerId { get; set; }
+        public string CountryCode { get; set; }
         public bool Deleted { get; set; }
         public int UserTypeId { get; set; }
         public string ActiveStatus { get; set; }

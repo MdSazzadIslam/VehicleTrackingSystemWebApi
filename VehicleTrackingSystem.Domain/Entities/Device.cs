@@ -11,7 +11,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
         [Key]
         [Column("DEVICE_ID")]
-        public int DeviceId { get; set; }
+        public Int64 DeviceId { get; set; }
 
         [Column("DEVICE_NAME")]
         public string DeviceName { get; set; }
