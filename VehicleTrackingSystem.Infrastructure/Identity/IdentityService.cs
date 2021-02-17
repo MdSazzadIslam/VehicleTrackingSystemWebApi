@@ -48,7 +48,6 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
 
             if (email != null)
             {
-
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email && !x.Deleted);
                 user.Deleted = true;
                 await _context.SaveChangesAsync();
@@ -115,7 +114,7 @@ namespace VehicleTrackingSystem.Infrastructure.Identity
 
             throw new NotFoundException(nameof(User), loginDto.Email);
         }
-        public async Task<(Result Result, int UserId)> Register(RegisterDto registerDto)
+        public async Task<(Result Result, int UserId)> Register(RegisterVm registerDto)
         {
 
             var checkUser = await _context.Users.FirstOrDefaultAsync(c => c.Email == registerDto.Email);

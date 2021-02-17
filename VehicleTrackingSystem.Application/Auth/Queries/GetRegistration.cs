@@ -6,7 +6,7 @@ using System.Text;
 
 namespace VehicleTrackingSystem.Application.Auth.Queries
 {
-    public class GetRegistration : IRequest<IList<RegisterDto>>
+    public class GetRegistration : IRequest<IList<RegisterVm>>
     {
         public GetRegistration()
         {

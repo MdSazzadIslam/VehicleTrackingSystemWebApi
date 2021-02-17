@@ -13,12 +13,19 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.10.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\VehicleTrackingSystem.Application\VehicleTrackingSystem.Application.csproj" />
     <ProjectReference Include="..\VehicleTrackingSystem.Infrastructure\VehicleTrackingSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\PrimaryImage\" />
   </ItemGroup>
 
 

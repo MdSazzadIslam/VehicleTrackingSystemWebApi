@@ -8,8 +8,8 @@ namespace VehicleTrackingSystem.Application.Auth
 {
     public interface IRegistrationService : IDisposable
     {
-        public Task<IList<RegisterDto>> GetRegistration();
-        public Task<IList<RegisterDto>> GetRegistrationById(string searchBy);
+        public Task<IList<RegisterVm>> GetRegistration();
+        public Task<IList<RegisterVm>> GetRegistrationById(string searchBy);
 
     }
 }

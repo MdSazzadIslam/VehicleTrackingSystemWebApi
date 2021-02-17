@@ -34,16 +34,18 @@ namespace VehicleTrackingSystem.Infrastructure.Data
         public DbSet<RequestLoggerEntity> LoggerEntities { get; set; }
         public DbSet<UrlAction> UrlActions { get; set; }
 
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Device> Device { get; set; }
-        public DbSet<Driver> Driver { get; set; }
-        public DbSet<Fuel> Fuel { get; set; }
-        public DbSet<LogHistory> LogHistory { get; set; }
-        public DbSet<Payment> Payment { get; set; }
-        public DbSet<TripRequest> Trip { get; set; }
-        public DbSet<TripHistory> TripHistory { get; set; }
+        //public DbSet<Customer> Customer { get; set; }
+        //public DbSet<Device> Device { get; set; }
+        //public DbSet<Driver> Driver { get; set; }
+        //public DbSet<LogHistory> LogHistory { get; set; }
+        //public DbSet<Payment> Payment { get; set; }
+        //public DbSet<TripRequest> Trip { get; set; }
+        //public DbSet<TripHistory> TripHistory { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
-
+        public DbSet<Expense> Expense { get; set; }
+        public DbSet<ExpenseType> L_EXPENSE_TYPE { get; set; }
+        public DbSet<ExpenseSubType> L_EXPENSE_SUB_TYPE { get; set; }
+        public DbSet<Owner> Owner { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
@@ -51,11 +53,11 @@ namespace VehicleTrackingSystem.Infrastructure.Data
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.EmployeeId;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.CreateDate = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.UpdateBy = _currentUserService.EmployeeId;
+                        entry.Entity.UpdateBy = _currentUserService.UserId;
                         entry.Entity.UpdateDate = _dateTime.Now;
                         break;
                 }

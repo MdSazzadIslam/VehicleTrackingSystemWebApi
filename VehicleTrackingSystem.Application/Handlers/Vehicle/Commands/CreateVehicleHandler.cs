@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,41 +10,21 @@ using VehicleTrackingSystem.Application.Common.Models;
 
 namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
 {
-    public class CreateVehicleHandler : IRequestHandler<CreateVehicle, Result>
+    public class CreateVehicleHandler : IRequestHandler<CreateVehicle, ResultModel>
     {
         private readonly IVehicleService _vehicleService;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IDateTime _dateTime;
-
-        public CreateVehicleHandler(IVehicleService vehicleService, ICurrentUserService currentUserService, IDateTime dateTime)
+        private readonly IMapper _mapper;
+        public CreateVehicleHandler(IVehicleService vehicleService, ICurrentUserService currentUserService, IDateTime dateTime, IMapper mapper)
         {
 
             _vehicleService = vehicleService ?? throw new ArgumentNullException(nameof(_vehicleService));
-            _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(_currentUserService));
-            _dateTime = dateTime ?? throw new ArgumentNullException(nameof(_dateTime));
-
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Result> Handle(CreateVehicle request, CancellationToken cancellationToken)
+        public async Task<ResultModel> Handle(CreateVehicle request, CancellationToken cancellationToken)
         {
-
-            var vechiles = new Domain.Entities.Vehicle
-            {
-
-                VehicleId = request.VehicleId,
-                VehicleName = request.VehicleName,
-                ChassisNo = request.ChassisNo,
-                ModelNo = request.ModelNo,
-                ColorCode = request.ColorCode,
-                ProductionYear = request.ProductionYear,
-                CountryCode = request.CountryCode,
-                Remarks = request.Remarks,
-                ActiveStatus = request.ActiveStatus
-
-
-            };
-
-            var result = await _vehicleService.CreateVehicle(vechiles);
+            var data = _mapper.Map<VehicleVm>(request);
+            var result = await _vehicleService.CreateVehicle(data);
             return result;
         }
     }

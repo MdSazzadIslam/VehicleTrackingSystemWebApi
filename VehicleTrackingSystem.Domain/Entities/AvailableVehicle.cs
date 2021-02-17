@@ -19,7 +19,9 @@ namespace VehicleTrackingSystem.Domain.Entities
 
         [ForeignKey("DRIVER_ID")]
         public Int64 DriverId { get; set; }
-        public Driver Driver { get; set; }
+        public virtual Driver Driver { get; set; }
+
+
 
     }
 }

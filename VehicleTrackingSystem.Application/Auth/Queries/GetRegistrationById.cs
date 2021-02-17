@@ -6,7 +6,7 @@ using System.Text;
 
 namespace VehicleTrackingSystem.Application.Auth.Queries
 {
-    public class GetRegistrationById : IRequest<IList<RegisterDto>>
+    public class GetRegistrationById : IRequest<IList<RegisterVm>>
     {
 
         public string SearchBy { get; set; }

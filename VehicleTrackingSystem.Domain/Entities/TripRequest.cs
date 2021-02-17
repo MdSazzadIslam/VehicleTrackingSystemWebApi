@@ -23,24 +23,15 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("DISTANCE")]
         public int distance { get; set; }
 
-
-        //public virtual TripHistory StartLocation { get; set; }
-        //public virtual TripHistory EndLocation { get; set; }
+        [Column("PAYMENT_AMOUNT")]
+        public int PaymentAmount { get; set; }
 
         //Foreign Key
         [Column("CUSTOMER_ID")]
         public Int64 CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
-        //Foreign Key
-        [Column("DRIVER_ID")]
-        public Int64 DriverId { get; set; }
-        public virtual Driver Driver { get; set; }
-
-        //Foreign Key
-        [Column("VEHICLE_ID")]
-        public Int64 VehicleId { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
+   
 
     }
 }

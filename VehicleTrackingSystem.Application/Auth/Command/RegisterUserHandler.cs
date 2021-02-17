@@ -17,13 +17,13 @@ namespace VehicleTrackingSystem.Application.Auth.Command
 
         public RegisterUserHandler(IIdentityService identityService, IMapper mapper)
         {
-            _identityService = identityService ?? throw new ArgumentNullException(nameof(mapper));
+            _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<Result> Handle(RegisterUser request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<RegisterDto>(request);
+            var user = _mapper.Map<RegisterVm>(request);
 
             var result = await _identityService.Register(user);
 

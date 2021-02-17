@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace VehicleTrackingSystem.Application.Auth.Queries
 {
-    public class GetRegistrationByIdHandler : IRequestHandler<GetRegistrationById, IList<RegisterDto>>
+    public class GetRegistrationByIdHandler : IRequestHandler<GetRegistrationById, IList<RegisterVm>>
     {
         private readonly IRegistrationService _registrationService;
         private readonly IMapper _mapper;
@@ -20,10 +20,10 @@ namespace VehicleTrackingSystem.Application.Auth.Queries
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IList<RegisterDto>> Handle(GetRegistrationById request, CancellationToken cancellationToken)
+        public async Task<IList<RegisterVm>> Handle(GetRegistrationById request, CancellationToken cancellationToken)
         {
             var users = await _registrationService.GetRegistrationById(request.SearchBy);
-            return _mapper.Map<IList<RegisterDto>>(users);
+            return _mapper.Map<IList<RegisterVm>>(users);
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+
 
 namespace VehicleTrackingSystem.Domain.Entities
 {
@@ -17,11 +16,14 @@ namespace VehicleTrackingSystem.Domain.Entities
         public decimal Latitude { get; set; }
 
         [Column("LONGITUDE")]
-
         public decimal Longitude { get; set; }
 
         [Column("TRIP_DATE")]
-        public decimal TripDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime TripDate { get; set; }
+
+        [Column("TRIP_TIME")]
+        public String TripTime { get; set; }
 
         [Column("SPEED")]
         public decimal? Speed { get; set; }
@@ -36,7 +38,6 @@ namespace VehicleTrackingSystem.Domain.Entities
         public short? Satellites { get; set; }
 
         [Column("HDOP")]
-
         public decimal? HDOP { get; set; }
 
         [Column("POSITION_STATUS")]
@@ -62,15 +63,23 @@ namespace VehicleTrackingSystem.Domain.Entities
 
         public int? DeviceConnectionMessageId { get; set; }
 
-        //Foreign Key
+        [Column("VEHICLE_ID")]
+        [ForeignKey("VEHICLE_ID")]
+        public Int64 VehicleId { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
+
+      
         [Column("TRIP_REQUEST_ID")]
+        [ForeignKey("TRIP_REQUEST_ID")]
         public Int64 TripRequestId { get; set; }
         public virtual TripRequest TripRequest { get; set; }
 
-        //Foreign Key
-        [Column("DEVEICE_ID")]
-        public decimal DeviceId { get; set; }
-        public virtual Device Device { get; set; }
+
+
+
+
+
+
 
     }
 }

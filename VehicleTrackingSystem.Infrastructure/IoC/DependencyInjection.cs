@@ -10,6 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using VehicleTrackingSystem.Application.Common.Interfaces;
+using VehicleTrackingSystem.Application.Handlers.Expense;
+using VehicleTrackingSystem.Application.Handlers.ExpenseSubType;
+using VehicleTrackingSystem.Application.Handlers.ExpenseType;
+using VehicleTrackingSystem.Application.Handlers.Vehicle;
 using VehicleTrackingSystem.Infrastructure.Data;
 using VehicleTrackingSystem.Infrastructure.Identity;
 using VehicleTrackingSystem.Infrastructure.Services;
@@ -63,10 +67,15 @@ namespace VehicleTrackingSystem.Infrastructure.IoC
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            //The object of this service are created newly every times a controller or service is called///////
+            
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<ILogToDatabaseService, LogToDatabaseService>();
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            services.AddScoped<IExpenseTypeService, ExpenseTypeService>();
+            services.AddScoped<IExpenseSubTypeService, ExpenseSubTypeService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
+            services.AddScoped<IVehicleService, VehicleService>();
             ///////////////////////////////END////////////////////////////////////////////////////////////////
 
             return services;

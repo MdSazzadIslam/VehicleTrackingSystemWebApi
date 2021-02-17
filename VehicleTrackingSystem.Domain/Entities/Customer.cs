@@ -26,10 +26,10 @@ namespace VehicleTrackingSystem.Domain.Entities
         public int DateOfBirth { get; set; }
 
         [Column("GENDER_ID")]
-        public int GENDER_ID { get; set; }
+        public int GenderId { get; set; }
 
         [Column("COUNTRY_CODE")]
-        public int COUNTRY_CODE { get; set; }
+        public int CountryCode { get; set; }
 
         [Column("CONTACT_NO")]
         public int ContactNo { get; set; }

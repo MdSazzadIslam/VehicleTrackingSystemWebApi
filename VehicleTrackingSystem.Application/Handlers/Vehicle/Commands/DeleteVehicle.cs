@@ -6,7 +6,7 @@ using VehicleTrackingSystem.Application.Common.Models;
 
 namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
 {
-    public class DeleteVehicle : IRequest<Result>
+    public class DeleteVehicle : IRequest<ResultModel>
     {
 
         public int Id { get; set; }

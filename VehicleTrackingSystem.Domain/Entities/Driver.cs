@@ -30,6 +30,12 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("COUNTRY_CODE")]
         public int COUNTRY_CODE { get; set; }
 
+        [Column("PRESENT_ADDRESS")]
+        public string PresentAddress { get; set; }
+
+        [Column("PERMANENT_ADDRESS")]
+        public string PermanentAddress { get; set; }
+
         [Column("CONTACT_NO")]
         public string ContactNo { get; set; }
 

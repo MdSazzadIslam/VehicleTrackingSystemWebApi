@@ -1,10 +1,17 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using VehicleTrackingSystem.Domain.Entities;
 
 namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Queries
 {
-    class GetVehicleById
+    public class GetVehicleById : IRequest<VehicleReturnVm>
     {
+        public int Id { get; set; }
+        public GetVehicleById(int id)
+        {
+            Id = id;
+        }
     }
 }

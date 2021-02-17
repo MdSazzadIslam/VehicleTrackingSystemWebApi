@@ -129,124 +129,174 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.ToTable("LoggerEntities");
                 });
 
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Expense", b =>
                 {
-                    b.Property<long>("RiderId")
+                    b.Property<int>("ExpenseId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("CUSTOMER_ID")
+                        .HasColumnType("int")
+                        .HasColumnName("EXPENSE_ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("COUNTRY_CODE")
+                    b.Property<int>("BillNo")
                         .HasColumnType("int")
-                        .HasColumnName("COUNTRY_CODE");
+                        .HasColumnName("BILL_NO");
 
-                    b.Property<int>("ContactNo")
-                        .HasColumnType("int")
-                        .HasColumnName("CONTACT_NO");
+                    b.Property<decimal>("BillingAmount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("BILLING_AMOUNT");
 
-                    b.Property<int>("DateOfBirth")
-                        .HasColumnType("int")
-                        .HasColumnName("DATE_OF_BIRTH");
-
-                    b.Property<int>("Email")
-                        .HasColumnType("int")
-                        .HasColumnName("EMAIL");
-
-                    b.Property<int>("GENDER_ID")
-                        .HasColumnType("int")
-                        .HasColumnName("GENDER_ID");
-
-                    b.Property<int>("JoiningDate")
-                        .HasColumnType("int")
-                        .HasColumnName("JOINING_DATE");
-
-                    b.Property<int>("RiderName")
-                        .HasColumnType("int")
-                        .HasColumnName("CUSTOMER_NAME");
-
-                    b.HasKey("RiderId");
-
-                    b.ToTable("RIDER");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Device", b =>
-                {
-                    b.Property<long>("DeviceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("DEVICE_ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ContactNo")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CONTACT_No");
+                    b.Property<DateTime>("BillingDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("BILLING_DATE");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("CREATE_DATE");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
                         .HasColumnName("CREATE_BY");
 
-                    b.Property<string>("DeviceName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("DEVICE_NAME");
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
 
-                    b.Property<int>("IMEINo")
+                    b.Property<int>("ExpenseSubTypeId")
                         .HasColumnType("int")
-                        .HasColumnName("IMEI_NO");
+                        .HasColumnName("EXPENSE_SUB_TYPE_ID");
 
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ExpenseTypeId")
+                        .HasColumnType("int")
+                        .HasColumnName("EXPENSE_TYPE_ID");
 
-                    b.Property<string>("Manufacturer")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("MANUFACTURER");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int")
+                        .HasColumnName("QUANTITY");
 
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
                         .HasColumnName("UPDATE_BY");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UPDATE_DATE");
 
-                    b.HasKey("DeviceId");
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int")
+                        .HasColumnName("VEHICLE_ID");
 
-                    b.ToTable("Device");
+                    b.HasKey("ExpenseId");
+
+                    b.ToTable("EXPENSE");
                 });
 
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Driver", b =>
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.ExpenseSubType", b =>
                 {
-                    b.Property<long>("DriverId")
+                    b.Property<int>("ExpenseSubTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("DRIVER_ID")
+                        .HasColumnType("int")
+                        .HasColumnName("EXPENSE_SUB_TYPE_ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("COUNTRY_CODE")
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CREATE_DATE");
+
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int")
-                        .HasColumnName("COUNTRY_CODE");
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
+
+                    b.Property<string>("ExpenseSubTypeName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EXPENSE_SUB_TYPE_NAME");
+
+                    b.Property<int>("ExpenseTypeId")
+                        .HasColumnType("int")
+                        .HasColumnName("EXPENSE_TYPE_ID");
+
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
+                        .HasColumnName("UPDATE_BY");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UPDATE_DATE");
+
+                    b.HasKey("ExpenseSubTypeId");
+
+                    b.ToTable("L_EXPENSE_SUB_TYPE");
+                });
+
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.ExpenseType", b =>
+                {
+                    b.Property<int>("ExpenseTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EXPENSE_TYPE_ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CREATE_DATE");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
+
+                    b.Property<string>("ExpenseTypeName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EXPENSE_TYPE_NAME");
+
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
+                        .HasColumnName("UPDATE_BY");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UPDATE_DATE");
+
+                    b.HasKey("ExpenseTypeId");
+
+                    b.ToTable("L_EXPENSE_TYPE");
+                });
+
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Owner", b =>
+                {
+                    b.Property<long>("OwnerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("OWNER_ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ContactNo")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("CONTACT_NO");
 
-                    b.Property<int>("DateOfBirth")
-                        .HasColumnType("int")
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("COUNTRY_CODE");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DATE_OF_BIRTH");
 
-                    b.Property<string>("DriverName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("DRIVER_NAME");
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("EMAIL");
 
-                    b.Property<int>("GENDER_ID")
+                    b.Property<int>("GenderId")
                         .HasColumnType("int")
                         .HasColumnName("GENDER_ID");
 
@@ -254,273 +304,32 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("JOINING_DATE");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int>("NidNo")
                         .HasColumnType("int")
-                        .HasColumnName("VEHICLE_ID");
+                        .HasColumnName("NID_NO");
 
-                    b.Property<long?>("VehicleInfosVehicleId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("OwnerName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OWNER_NAME");
 
-                    b.HasKey("DriverId");
+                    b.Property<string>("PermanentAddress")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PERMANENT_ADDRESS");
 
-                    b.HasIndex("VehicleInfosVehicleId");
-
-                    b.ToTable("DRIVE_INFO");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Fuel", b =>
-                {
-                    b.Property<long>("FuelDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("FUEL_DETAIL_ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float")
-                        .HasColumnName("AMOUNT");
-
-                    b.Property<int>("BillNo")
-                        .HasColumnType("int")
-                        .HasColumnName("BILL_NO");
-
-                    b.Property<DateTime>("BillingDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("BILLING_DATE");
+                    b.Property<string>("PresentAddress")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRESENT_ADDRESS");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int")
                         .HasColumnName("VEHICLE_ID");
 
-                    b.Property<long?>("VehicleInfosVehicleId")
-                        .HasColumnType("bigint");
+                    b.HasKey("OwnerId");
 
-                    b.Property<double>("litre")
-                        .HasColumnType("float")
-                        .HasColumnName("LITRE");
+                    b.HasIndex("VehicleId")
+                        .IsUnique();
 
-                    b.HasKey("FuelDetailId");
-
-                    b.HasIndex("VehicleInfosVehicleId");
-
-                    b.ToTable("FUEL_DETAIL");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.LogHistory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CREATE_DATE");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CREATE_BY");
-
-                    b.Property<string>("Data")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("UPDATE_BY");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("UPDATE_DATE");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LogHistory");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Payment", b =>
-                {
-                    b.Property<long>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("PAYMENT_ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int")
-                        .HasColumnName("CUSTOMER_ID");
-
-                    b.Property<long?>("CustomerRiderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("PaymentAmount")
-                        .HasColumnType("float")
-                        .HasColumnName("PAYMENT_AMOUNT");
-
-                    b.Property<int>("PaymentModeId")
-                        .HasColumnType("int")
-                        .HasColumnName("PAYMENT_MODE_ID");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("CustomerRiderId");
-
-                    b.ToTable("PAYMENT");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Trip", b =>
-                {
-                    b.Property<long>("TripId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("TRIP_ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CREATE_DATE");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CREATE_BY");
-
-                    b.Property<long>("CustomerId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("CUSTOMER_ID");
-
-                    b.Property<long>("DriverId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("DRIVER_ID");
-
-                    b.Property<int>("EndLocationId")
-                        .HasColumnType("int")
-                        .HasColumnName("END_LOCATION");
-
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StartLocationId")
-                        .HasColumnType("int")
-                        .HasColumnName("START_LOCATION");
-
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("UPDATE_BY");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("UPDATE_DATE");
-
-                    b.Property<long>("VehicleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("VEHICLE_ID");
-
-                    b.Property<int>("distance")
-                        .HasColumnType("int")
-                        .HasColumnName("DISTANCE");
-
-                    b.HasKey("TripId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("TRIP_INFO");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.TripHistory", b =>
-                {
-                    b.Property<long>("TripHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("TRIP_HISTORY_ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal?>("Altitude")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("ALTITUDE");
-
-                    b.Property<int?>("CellId")
-                        .HasColumnType("int")
-                        .HasColumnName("CELL_ID");
-
-                    b.Property<int?>("DeviceConnectionMessageId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("DeviceId")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("DEVEICE_ID");
-
-                    b.Property<long?>("DeviceId1")
-                        .HasColumnType("bigint");
-
-                    b.Property<short?>("GsmSignal")
-                        .HasColumnType("smallint")
-                        .HasColumnName("GSM_SIGNAL");
-
-                    b.Property<decimal?>("HDOP")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("HDOP");
-
-                    b.Property<decimal?>("Heading")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("HEADING");
-
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("LATITUDE");
-
-                    b.Property<int?>("LocationAreaCode")
-                        .HasColumnType("int")
-                        .HasColumnName("LOCATION_AREA_CODE");
-
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("LONGITUDE");
-
-                    b.Property<int?>("MobileCountryCode")
-                        .HasColumnType("int")
-                        .HasColumnName("MOBILE_COUNTRY_CODE");
-
-                    b.Property<int?>("MobileNetworkCode")
-                        .HasColumnType("int")
-                        .HasColumnName("NETWORK_COUNTRY_CODE");
-
-                    b.Property<double?>("Odometer")
-                        .HasColumnType("float")
-                        .HasColumnName("ODO_METER");
-
-                    b.Property<bool?>("PositionStatus")
-                        .HasColumnType("bit")
-                        .HasColumnName("POSITION_STATUS");
-
-                    b.Property<short?>("Satellites")
-                        .HasColumnType("smallint")
-                        .HasColumnName("SATELLITES");
-
-                    b.Property<decimal?>("Speed")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("SPEED");
-
-                    b.Property<decimal>("TripDate")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("TRIP_DATE");
-
-                    b.Property<long>("TripId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("TRIP_ID");
-
-                    b.HasKey("TripHistoryId");
-
-                    b.HasIndex("DeviceId1");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("VEHICLE_HISTORY");
+                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.UrlAction", b =>
@@ -543,9 +352,9 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Vehicle", b =>
                 {
-                    b.Property<long>("VehicleId")
+                    b.Property<int>("VehicleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnName("VEHICLE_ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -570,12 +379,25 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("CREATE_DATE");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
                         .HasColumnName("CREATE_BY");
 
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
+
+                    b.Property<int>("EngineCC")
+                        .HasColumnType("int")
+                        .HasColumnName("ENGINE_CC");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("IMAGE_NAME");
+
+                    b.Property<long>("ManufacturerId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("MANUFACTURER_ID");
 
                     b.Property<string>("ModelNo")
                         .HasColumnType("nvarchar(max)")
@@ -585,12 +407,16 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("PRODUCTION_YEAR");
 
+                    b.Property<int>("RegistrationYear")
+                        .HasColumnType("int")
+                        .HasColumnName("REGISTRATION_YEAR");
+
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("REMARKS");
 
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
                         .HasColumnName("UPDATE_BY");
 
                     b.Property<DateTime>("UpdateDate")
@@ -603,7 +429,7 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
 
                     b.HasKey("VehicleId");
 
-                    b.ToTable("VEHICLE_INFO");
+                    b.ToTable("VEHICLE");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Infrastructure.Identity.Role", b =>
@@ -765,75 +591,13 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Driver", b =>
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Owner", b =>
                 {
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Vehicle", "VehicleInfos")
-                        .WithMany()
-                        .HasForeignKey("VehicleInfosVehicleId");
-
-                    b.Navigation("VehicleInfos");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Fuel", b =>
-                {
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Vehicle", "VehicleInfos")
-                        .WithMany()
-                        .HasForeignKey("VehicleInfosVehicleId");
-
-                    b.Navigation("VehicleInfos");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Payment", b =>
-                {
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerRiderId");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Trip", b =>
-                {
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Vehicle", null)
+                        .WithOne("Owner")
+                        .HasForeignKey("VehicleTrackingSystem.Domain.Entities.Owner", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Vehicle", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.TripHistory", b =>
-                {
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId1");
-
-                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Trip", "Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Device");
-
-                    b.Navigation("Trip");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Infrastructure.Identity.UserRole", b =>
@@ -853,6 +617,11 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Vehicle", b =>
+                {
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Infrastructure.Identity.Role", b =>

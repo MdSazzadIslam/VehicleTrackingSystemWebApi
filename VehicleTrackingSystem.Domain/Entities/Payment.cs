@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using VehicleTrackingSystem.Domain.Common;
 
 namespace VehicleTrackingSystem.Domain.Entities
 {
     [Table("PAYMENT")]
-    public class Payment
+    public class Payment : AuditableEntity
     {
         [Key]
         [Column("PAYMENT_ID")]
@@ -15,6 +14,14 @@ namespace VehicleTrackingSystem.Domain.Entities
 
         [Column("PAYMENT_MODE_ID")]
         public int PaymentModeId { get; set; }
+
+        [Column("PAYMENT_DATE")]
+        [DataType(DataType.Date)]
+        public double PaymentDate { get; set; }
+
+        [Column("DUE_DATE")]
+        [DataType(DataType.Date)]
+        public double DueDate { get; set; }
 
         [Column("COUPON_CODE")]
         public string CouponCode { get; set; }
