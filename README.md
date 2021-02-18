@@ -11,5 +11,6 @@ Data access with Entity Framework Core,
 Web API using ASP.NET Core,
 Open API with NSwag,
 Security using ASP.NET Core Identity + IdentityServer,
-Entity Framework
+Entity Framework,
+Clean Architecture
 
