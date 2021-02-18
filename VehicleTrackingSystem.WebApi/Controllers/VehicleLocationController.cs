@@ -30,6 +30,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CreateVehicleLocation(CreateVehicleLocation command)
         {
@@ -51,6 +52,37 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateVehicleLocation (UpdateVehicleLocation command, int id)
+        {
+            try
+            {
+                _logger.LogInformation("UpdateVehicleLocation method fired on {date}", DateTime.Now);
+             
+                if(id != command.VehicleLocationId)
+                {
+                    _logger.LogError("UpdateVehicleLocation method error. Id not found... on {date}", DateTime.Now);
+                  
+                    return BadRequest();
+                }
+
+                var result = await _mediator.Send(command);
+                _logger.LogInformation("UpdateVehicleLocation  method task finished on {date}", DateTime.Now);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("UpdateVehicleLocation  method task finished on {date}", DateTime.Now);
+                _logger.LogError($"Error in UpdateVehicleLocation  method: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error in UpdateVehicleLocation  method");
+
+            }
+
+        }
+
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DE(int id)
         {
@@ -72,6 +104,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetVehicle()
         {
@@ -93,13 +126,14 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [HttpGet("{searchBy}")]
-        public async Task<IActionResult> GetVehicleById(string searchBy)
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVehicleById(int id)
         {
             try
             {
                 _logger.LogInformation("Get vehicle Location method fired on {date}", DateTime.Now);
-                var result = await _mediator.Send(new GetVehicleLocationById(searchBy));
+                var result = await _mediator.Send(new GetVehicleLocationById(id));
                 _logger.LogInformation("Get vehicle Location method task finished on {date}", DateTime.Now);
                 return Ok(result);
             }

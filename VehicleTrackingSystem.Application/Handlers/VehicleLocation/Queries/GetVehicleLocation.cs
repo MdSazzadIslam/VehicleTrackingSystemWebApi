@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation.Queries
 {
-    public class GetVehicleLocation : IRequest<IList<Domain.Entities.VehicleLocation>>
+    public class GetVehicleLocation : IRequest<IList<VehicleLocationReturnVm>>
     {
         public GetVehicleLocation()
         {

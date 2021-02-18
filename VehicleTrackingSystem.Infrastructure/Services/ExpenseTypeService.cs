@@ -36,26 +36,77 @@ namespace VehicleTrackingSystem.Infrastructure.Services
         }
         public async Task<ResultModel> CreateExpenseType(ExpenseTypeVm expense)
         {
-            
-            var entity = new ExpenseType
+            try
             {
-               ExpenseTypeId = expense.ExpenseTypeId,
-               ExpenseTypeName = expense.ExpenseTypeName,
+                var entity = new ExpenseType
+                {
+                    ExpenseTypeName = expense.ExpenseTypeName,
 
-                UpdateBy = _currentUserService.UserId,
-                UpdateDate = _dateTime.Now,
-                CreatedBy = _currentUserService.UserId,
-                CreateDate = _dateTime.Now,
-            };
+                    CreatedBy = _currentUserService.UserId,
+                    CreateDate = _dateTime.Now,
+                };
 
-            await _context.L_EXPENSE_TYPE.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            return new ResultModel { Result = true, Message = NotificationConfig.InsertSuccessMessage($"{expense.ExpenseTypeName}"),
-                Id = entity.ExpenseTypeId.ToString() };
+                await _context.L_EXPENSE_TYPE.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return new ResultModel
+                {
+                    Result = true,
+                    Message = NotificationConfig.InsertSuccessMessage($"{expense.ExpenseTypeName}"),
+                    Id = entity.ExpenseTypeId.ToString()
+                };
 
-           
+            }
+            catch (Exception)
+            {
+                return new ResultModel { Result = false, Message = NotificationConfig.InsertErrorMessage($"{expense.ExpenseTypeName}") };
+
+            }
+
 
         }
+
+        public async Task<ResultModel> UpdateExpenseType(UpdateExpenseTypeVm updateExpenseTypeVm)
+        {
+            try
+            {
+                var VehicleLocationId = await _context.L_EXPENSE_TYPE.FirstOrDefaultAsync(x => x.ExpenseTypeId == updateExpenseTypeVm.ExpenseTypeId && !x.Deleted);
+                if (VehicleLocationId != null)
+                {
+                    var entity = new ExpenseType
+                    {
+                        ExpenseTypeName = updateExpenseTypeVm.ExpenseTypeName,
+
+                        UpdateBy = _currentUserService.UserId,
+                        UpdateDate = _dateTime.Now,
+
+                    };
+
+                     _context.L_EXPENSE_TYPE.Update(entity);
+                    await _context.SaveChangesAsync();
+                    return new ResultModel
+                    {
+                        Result = true,
+                        Message = NotificationConfig.InsertSuccessMessage($"{updateExpenseTypeVm.ExpenseTypeName}"),
+                        Id = entity.ExpenseTypeId.ToString()
+                    };
+
+                }
+                else
+                {
+                    return new ResultModel { Result = false, Message = NotificationConfig.NotFoundMessage($"{updateExpenseTypeVm.ExpenseTypeName}") };
+                }
+
+
+            }
+            catch (Exception)
+            {
+                return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateExpenseTypeVm.ExpenseTypeName}") };
+
+            }
+
+
+        }
+
 
         public async Task<ResultModel> DeleteExpenseType(int id)
         {

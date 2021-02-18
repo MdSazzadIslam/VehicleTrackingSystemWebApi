@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,39 +10,20 @@ using VehicleTrackingSystem.Application.Common.Models;
 
 namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
 {
-    public class CreateBillPaymentHandler : IRequestHandler<CreateBillPayment, Result>
+    public class CreateBillPaymentHandler : IRequestHandler<CreateBillPayment, ResultModel>
     {
         private readonly IBillPaymentService _billPaymentService;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IDateTime _dateTime;
+        private readonly IMapper _mapper;
 
-        public CreateBillPaymentHandler(IBillPaymentService billPaymentService, ICurrentUserService currentUserService, IDateTime dateTime)
+        public CreateBillPaymentHandler(IBillPaymentService billPaymentService, IMapper mapper)
         {
             _billPaymentService = billPaymentService ?? throw new ArgumentNullException(nameof(_billPaymentService));
-            _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(_currentUserService));
-            _dateTime = dateTime ?? throw new ArgumentNullException(nameof(_dateTime));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-        public async Task<Result> Handle(CreateBillPayment request, CancellationToken cancellationToken)
+        public async Task<ResultModel> Handle(CreateBillPayment request, CancellationToken cancellationToken)
         {
-            var bills = new Domain.Entities.BillPayment
-            {
-
-                BillPaymentId = request.BillPaymentId,
-                BillNo = request.BillNo,
-                PaymentDate = request.PaymentDate,
-                BillingAmount = request.PaymentAmount,
-                DiscountAmount = request.DiscountAmount,
-                DueAmount = request.DueAmount,
-                PaymentAmount = request.PaymentAmount,
-
-                UpdateBy = _currentUserService.UserId,
-                UpdateDate = _dateTime.Now,
-                CreatedBy = _currentUserService.UserId,
-                CreateDate = _dateTime.Now,
-
-            };
-
-            var result = await _billPaymentService.CreateBillPayment(bills);
+            var data = _mapper.Map<BillPaymentVm>(request);
+            var result = await _billPaymentService.CreateBillPayment(data);
             return result;
         }
     }

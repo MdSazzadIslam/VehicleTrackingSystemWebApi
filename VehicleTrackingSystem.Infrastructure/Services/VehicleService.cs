@@ -48,26 +48,13 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
         public async  Task<ResultModel> CreateVehicle(VehicleVm vehicleVm)
         {
-            //for Image save in a specific path
+            
 
             try
             {
-                string imagePath = "";
-                bool isSaved = false;
-                byte[] imageInBytes = new byte[] { };
+               
 
-                if (vehicleVm.ImageName != null || vehicleVm.ImageName != "null")
-                {
-                    if (vehicleVm.ImageName.Contains(","))
-                    {
-                        vehicleVm.ImageName = vehicleVm.ImageName.Substring(vehicleVm.ImageName.IndexOf(",") + 1);
-                    }
-                    imageInBytes = Convert.FromBase64String(vehicleVm.ImageName);
-                    vehicleVm.ImageName = string.Format(@"{0}.png", Guid.NewGuid().ToString().Replace("-", ""));
-                }
-
-
-                var entity = new Domain.Entities.Vehicle
+                var entity = new  Vehicle
                 {
 
                     VehicleId = vehicleVm.VehicleId,
@@ -90,7 +77,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
                 };
 
-                await _context.Vehicle.AddAsync(entity);
+                await _context.VEHICLE.AddAsync(entity);
                 
 
                 await _context.SaveChangesAsync();
@@ -112,7 +99,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
                 };
 
-                await _context.Owner.AddAsync(data);
+                await _context.OWNER.AddAsync(data);
                 await _context.SaveChangesAsync();
 
 
@@ -125,45 +112,112 @@ namespace VehicleTrackingSystem.Infrastructure.Services
                     Id = entity.VehicleId.ToString()
                 };
 
-                if ( vehicleVm.ImageName != null)
+ 
+
+                
+
+            }
+            catch(Exception)
+            {
+                return new ResultModel { Result = false, Message = NotificationConfig.InsertErrorMessage($"{vehicleVm.VehicleName}") };
+
+            }
+
+
+
+
+
+        }
+        public async Task<ResultModel> UpdateVehicle(UpdateVehicleVm updateVehicleVm)
+        {
+           
+            try
+            {
+
+                var VehicleLocationId = await _context.VEHICLE.FirstOrDefaultAsync(x => x.VehicleId == updateVehicleVm.VehicleId && !x.Deleted);
+                if (VehicleLocationId != null)
                 {
-                   
-                        imagePath = ImageDirectory.CheckDirectory(_hostEnvironment, PathConstant.PRIMARY_IMAGE_PATH);
-
-                        isSaved = await ImageDirectory.SaveImageInDirectory(imageInBytes, imagePath, vehicleVm.ImageName);
-                        if (!isSaved)
-                        {
-                            return new ResultModel { Result = false, Message = NotificationConfig.NotFoundError };
 
 
-                            //return Result.Failure(new List<string> { "Image Not Saved!!" });
-                        }
+                    var entity = new Vehicle
+                    {
 
-                     
+                        VehicleId = updateVehicleVm.VehicleId,
+                        VehicleName = updateVehicleVm.VehicleName,
+                        ChassisNo = updateVehicleVm.ChassisNo,
+                        ModelNo = updateVehicleVm.ModelNo,
+                        ColorCode = updateVehicleVm.ColorCode,
+                        ProductionYear = updateVehicleVm.ProductionYear,
+                        RegistrationYear = updateVehicleVm.RegistrationYear,
+                        ManufacturerId = updateVehicleVm.ManufacturerId,
+                        EngineCC = updateVehicleVm.EngineCC,
+                        CountryCode = updateVehicleVm.CountryCode,
+                        Remarks = updateVehicleVm.Remarks,
+                        ActiveStatus = updateVehicleVm.ActiveStatus,
 
+                        UpdateBy = _currentUserService.UserId,
+                        UpdateDate = _dateTime.Now,
+                        CreatedBy = _currentUserService.UserId,
+                        CreateDate = _dateTime.Now,
+
+                    };
+
+                    _context.VEHICLE.Update(entity);
+
+                    var data = new Owner
+                    {
+                        OwnerId = updateVehicleVm.Owner.OwnerId,
+                        OwnerName = updateVehicleVm.Owner.OwnerName,
+                        VehicleId = entity.VehicleId,
+                        JoiningDate = updateVehicleVm.Owner.JoiningDate,
+                        DateOfBirth = updateVehicleVm.Owner.DateOfBirth,
+                        NidNo = updateVehicleVm.Owner.NidNo,
+                        GenderId = updateVehicleVm.Owner.GenderId,
+                        PresentAddress = updateVehicleVm.Owner.PresentAddress,
+                        PermanentAddress = updateVehicleVm.Owner.PermanentAddress,
+                        CountryCode = updateVehicleVm.Owner.CountryCode,
+                        Email = updateVehicleVm.Owner.Email,
+                        Deleted = false
+
+                    };
+
+                    _context.OWNER.Update(data);
+                    await _context.SaveChangesAsync();
+
+
+                    return new ResultModel
+                    {
+                        Result = true,
+                        Message = NotificationConfig.UpdateSuccessMessage($"{updateVehicleVm.VehicleName}"),
+                        Id = entity.VehicleId.ToString()
+                    };
 
                 }
+                else
+                {
 
-                return null;
+                    return new ResultModel { Result = false, Message = NotificationConfig.NotFoundMessage($"{updateVehicleVm.VehicleName} information") };
+
+                }
+ 
 
             }
-            catch(Exception e)
+            catch (Exception)
             {
-                return new ResultModel { Result = false, Message = NotificationConfig.NotFoundError };
-               // return Result.Failure(new List<string> { "Error Occured!!" });
+                return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateVehicleVm.VehicleName}") };
+
             }
-           
 
 
-           
-           
+
+
+
         }
-
         public async Task<ResultModel> DeleteVehicle(int id)
         {
             if (id > 0)
             {
-                var entity = await _context.Vehicle.FirstOrDefaultAsync(x => x.VehicleId == id && x.Deleted == false);
+                var entity = await _context.VEHICLE.FirstOrDefaultAsync(x => x.VehicleId == id && x.Deleted == false);
                 if (entity != null)
                 {
                     entity.Deleted = true;
@@ -184,14 +238,14 @@ namespace VehicleTrackingSystem.Infrastructure.Services
        
         public async Task<IList<VehicleReturnVm>> GetVehicle()
         {
-            var entity = await _context.Vehicle.Where(x => x.Deleted == false).ToListAsync();
+            var entity = await _context.VEHICLE.Where(x => x.Deleted == false).ToListAsync();
             var data = _mapper.Map<IList<VehicleReturnVm>>(entity);
             return data;
         }
 
         public async Task<VehicleReturnVm> GetVehicleById(int id)
         {
-            var entity = await _context.Vehicle.FirstOrDefaultAsync(x => x.VehicleId == id && !x.Deleted);
+            var entity = await _context.VEHICLE.FirstOrDefaultAsync(x => x.VehicleId == id && !x.Deleted);
             var data = _mapper.Map<VehicleReturnVm>(entity);
             return data;
         }

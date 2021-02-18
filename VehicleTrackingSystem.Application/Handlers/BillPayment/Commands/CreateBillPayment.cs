@@ -6,7 +6,7 @@ using VehicleTrackingSystem.Application.Common.Models;
 
 namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
 {
-    public class CreateBillPayment : IRequest<Result>
+    public class CreateBillPayment : IRequest<ResultModel>
     {
         public int BillPaymentId { get; set; }
         public int BillNo { get; set; }

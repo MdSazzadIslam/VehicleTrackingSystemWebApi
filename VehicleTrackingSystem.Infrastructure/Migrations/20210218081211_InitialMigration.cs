@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VehicleTrackingSystem.Infrastructure.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,29 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BILL_PAYMENT",
+                columns: table => new
+                {
+                    BILL_PAYMENT_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BILL_NO = table.Column<int>(type: "int", nullable: false),
+                    BILLING_DATE = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BILLING_AMOUNT = table.Column<double>(type: "float", nullable: false),
+                    DISCOUNT_AMOUNT = table.Column<double>(type: "float", nullable: false),
+                    DUE_AMOUNT = table.Column<double>(type: "float", nullable: false),
+                    PAYMENT_AMOUNT = table.Column<double>(type: "float", nullable: false),
+                    DELETED = table.Column<bool>(type: "bit", nullable: false),
+                    CREATE_BY = table.Column<int>(type: "int", nullable: false),
+                    CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UPDATE_BY = table.Column<int>(type: "int", nullable: false),
+                    UPDATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BILL_PAYMENT", x => x.BILL_PAYMENT_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,7 +302,7 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Owner",
+                name: "OWNER",
                 columns: table => new
                 {
                     OWNER_ID = table.Column<long>(type: "bigint", nullable: false)
@@ -299,13 +322,44 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Owner", x => x.OWNER_ID);
+                    table.PrimaryKey("PK_OWNER", x => x.OWNER_ID);
                     table.ForeignKey(
-                        name: "FK_Owner_VEHICLE_VEHICLE_ID",
+                        name: "FK_OWNER_VEHICLE_VEHICLE_ID",
                         column: x => x.VEHICLE_ID,
                         principalTable: "VEHICLE",
                         principalColumn: "VEHICLE_ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VEHICLE_LOCATION",
+                columns: table => new
+                {
+                    VEHICLE_LOCATION_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LATITUDE = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LONGITUDE = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TRIP_DATE = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TRIP_TIME = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SPEED = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ALTITUDE = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    DELETED = table.Column<bool>(type: "bit", nullable: false),
+                    VEHICLE_ID = table.Column<long>(type: "bigint", nullable: false),
+                    VehicleId1 = table.Column<int>(type: "int", nullable: true),
+                    CREATE_BY = table.Column<int>(type: "int", nullable: false),
+                    CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UPDATE_BY = table.Column<int>(type: "int", nullable: false),
+                    UPDATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VEHICLE_LOCATION", x => x.VEHICLE_LOCATION_ID);
+                    table.ForeignKey(
+                        name: "FK_VEHICLE_LOCATION_VEHICLE_VehicleId1",
+                        column: x => x.VehicleId1,
+                        principalTable: "VEHICLE",
+                        principalColumn: "VEHICLE_ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -348,10 +402,15 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Owner_VEHICLE_ID",
-                table: "Owner",
+                name: "IX_OWNER_VEHICLE_ID",
+                table: "OWNER",
                 column: "VEHICLE_ID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VEHICLE_LOCATION_VehicleId1",
+                table: "VEHICLE_LOCATION",
+                column: "VehicleId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -372,6 +431,9 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BILL_PAYMENT");
+
+            migrationBuilder.DropTable(
                 name: "EXPENSE");
 
             migrationBuilder.DropTable(
@@ -384,10 +446,13 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                 name: "LoggerEntities");
 
             migrationBuilder.DropTable(
-                name: "Owner");
+                name: "OWNER");
 
             migrationBuilder.DropTable(
                 name: "UrlActions");
+
+            migrationBuilder.DropTable(
+                name: "VEHICLE_LOCATION");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

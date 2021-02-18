@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation.Queries
 {
-    public class GetVehicleLocationHandler : IRequestHandler<GetVehicleLocation, IList<Domain.Entities.VehicleLocation>>
+    public class GetVehicleLocationHandler : IRequestHandler<GetVehicleLocation, IList<VehicleLocationReturnVm>>
     {
         private readonly IVehicleLocationService _vehicleLocationService;
         private readonly IMapper _mapper;
@@ -19,10 +19,10 @@ namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation.Queries
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IList<Domain.Entities.VehicleLocation>> Handle(GetVehicleLocation request, CancellationToken cancellationToken)
+        public async Task<IList<VehicleLocationReturnVm>> Handle(GetVehicleLocation request, CancellationToken cancellationToken)
         {
             var vehicles = await _vehicleLocationService.GetVehicleLocation();
-            return _mapper.Map<IList<Domain.Entities.VehicleLocation>>(vehicles);
+            return _mapper.Map<IList<VehicleLocationReturnVm>>(vehicles);
         }
     }
 }

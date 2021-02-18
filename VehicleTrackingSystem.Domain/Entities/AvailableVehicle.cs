@@ -10,8 +10,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class AvailableVehicle
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("AVAILABLE_VEHICLE_ID")]
-        public Int64 AvailableVehicleId { get; set; }
+        public int AvailableVehicleId { get; set; }
 
         [ForeignKey("TRIP_REQUEST_ID")]
         public Int64 TripRequestId { get;set;}

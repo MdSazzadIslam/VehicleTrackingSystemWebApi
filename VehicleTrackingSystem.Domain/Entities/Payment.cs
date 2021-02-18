@@ -9,6 +9,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class Payment : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("PAYMENT_ID")]
         public Int64 PaymentId { get; set; }
 

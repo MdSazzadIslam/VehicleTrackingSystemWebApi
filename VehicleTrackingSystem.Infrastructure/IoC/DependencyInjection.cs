@@ -10,10 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using VehicleTrackingSystem.Application.Common.Interfaces;
+using VehicleTrackingSystem.Application.Handlers.BillPayment;
 using VehicleTrackingSystem.Application.Handlers.Expense;
 using VehicleTrackingSystem.Application.Handlers.ExpenseSubType;
 using VehicleTrackingSystem.Application.Handlers.ExpenseType;
 using VehicleTrackingSystem.Application.Handlers.Vehicle;
+using VehicleTrackingSystem.Application.Handlers.VehicleLocation;
 using VehicleTrackingSystem.Infrastructure.Data;
 using VehicleTrackingSystem.Infrastructure.Identity;
 using VehicleTrackingSystem.Infrastructure.Services;
@@ -76,6 +78,8 @@ namespace VehicleTrackingSystem.Infrastructure.IoC
             services.AddScoped<IExpenseSubTypeService, ExpenseSubTypeService>();
             services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleLocationService, VehicleLocationService>();
+            services.AddScoped<IBillPaymentService, BillPaymentService>();
             ///////////////////////////////END////////////////////////////////////////////////////////////////
 
             return services;

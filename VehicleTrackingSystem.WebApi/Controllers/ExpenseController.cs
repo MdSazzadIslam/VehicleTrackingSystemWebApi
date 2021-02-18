@@ -53,6 +53,36 @@ namespace VehicleTrackingSystem.WebApi.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateExpense(UpdateExpense command, int id)
+        {
+            try
+            {
+                _logger.LogInformation("UpdateExpense method fired on {date}", DateTime.Now);
+
+                if (id != command.ExpenseId)
+                {
+                    _logger.LogError("UpdateExpense method error. Id not found... on {date}", DateTime.Now);
+
+                    return BadRequest();
+                }
+
+                var result = await _mediator.Send(command);
+                _logger.LogInformation("UpdateExpense  method task finished on {date}", DateTime.Now);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("UpdateExpense  method task finished on {date}", DateTime.Now);
+                _logger.LogError($"Error in UpdateExpense  method: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error in UpdateExpense  method");
+
+            }
+
+        }
+
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExpense(int id)
         {

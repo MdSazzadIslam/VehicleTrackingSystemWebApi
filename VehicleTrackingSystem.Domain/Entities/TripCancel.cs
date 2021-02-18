@@ -10,7 +10,10 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class TripCancel 
     {
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("TRIP_CANCEL_ID")]
+      
         public Int64 TripCancelId { get; set; }
 
         [Column("TRIP_CANCEL_DATE")]

@@ -11,8 +11,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class Customer : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CUSTOMER_ID")]
-        public Int64 RiderId { get; set; }
+        public int CustomerId { get; set; }
 
         [Column("CUSTOMER_NAME")]
         public int RiderName { get; set; }

@@ -5,12 +5,12 @@ using System.Text;
 
 namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation.Queries
 {
-    public class GetVehicleLocationById : IRequest<IList<Domain.Entities.VehicleLocation>>
+    public class GetVehicleLocationById : IRequest<VehicleLocationReturnVm>
     {
-        public string SearchBy { get; set; }
-        public GetVehicleLocationById(string searchBy)
+        public int Id { get; set; }
+        public GetVehicleLocationById(int id)
         {
-            SearchBy = searchBy;
+            Id = id;
 
         }
     }

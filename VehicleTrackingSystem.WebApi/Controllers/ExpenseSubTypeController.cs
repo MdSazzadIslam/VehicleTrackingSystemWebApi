@@ -52,6 +52,37 @@ namespace VehicleTrackingSystem.WebApi.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateExpenseSubType(UpdateExpenseSubType command, int id)
+        {
+            try
+            {
+                _logger.LogInformation("UpdateExpenseSubType method fired on {date}", DateTime.Now);
+
+                if (id != command.ExpenseSubTypeId)
+                {
+                    _logger.LogError("UpdateExpenseSubType method error. Id not found... on {date}", DateTime.Now);
+
+                    return BadRequest();
+                }
+
+                var result = await _mediator.Send(command);
+                _logger.LogInformation("UpdateExpenseSubType  method task finished on {date}", DateTime.Now);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("UpdateExpenseSubType  method task finished on {date}", DateTime.Now);
+                _logger.LogError($"Error in UpdateExpenseSubType  method: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error in UpdateExpenseSubType  method");
+
+            }
+
+        }
+
+
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExpenseSubType(int id)
         {

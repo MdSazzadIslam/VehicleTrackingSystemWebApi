@@ -10,8 +10,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class Driver
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DRIVER_ID")]
-        public Int64 DriverId { get; set; }
+        public int DriverId { get; set; }
 
         [Column("DRIVER_NAME")]
         public string DriverName { get; set; }

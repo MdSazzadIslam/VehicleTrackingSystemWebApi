@@ -29,6 +29,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CreateBillPayment(CreateBillPayment command)
         {
@@ -50,6 +51,39 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateBillPayment(UpdateBillPayment command, int id)
+        {
+            try
+            {
+                _logger.LogInformation("UpdateBillPayment method fired on {date}", DateTime.Now);
+
+                if (id != command.BillPaymentId)
+                {
+                    _logger.LogError("UpdateBillPayment method error. Id not found... on {date}", DateTime.Now);
+
+                    return BadRequest();
+                }
+
+                var result = await _mediator.Send(command);
+                _logger.LogInformation("UpdateBillPayment  method task finished on {date}", DateTime.Now);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("UpdateBillPayment  method task finished on {date}", DateTime.Now);
+                _logger.LogError($"Error in UpdateBillPayment  method: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error in UpdateBillPayment  method");
+
+            }
+
+
+        }
+
+
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBillPayment(int id)
         {
@@ -71,6 +105,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetBillPayment()
         {
@@ -92,13 +127,14 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [HttpGet("{searchBy}")]
-        public async Task<IActionResult> GetBillPaymentById(string searchBy)
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBillPaymentById(int id)
         {
             try
             {
                 _logger.LogInformation("GetBillPaymentById method fired on {date}", DateTime.Now);
-                var result = await _mediator.Send(new GetBillPaymentById(searchBy));
+                var result = await _mediator.Send(new GetBillPaymentById(id));
                 _logger.LogInformation("GetBillPaymentById method task finished on {date}", DateTime.Now);
                 return Ok(result);
             }

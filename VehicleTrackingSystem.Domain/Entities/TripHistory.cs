@@ -9,6 +9,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class TripHistory
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("TRIP_HISTORY_ID")]
         public Int64 TripHistoryId { get; set; }
 

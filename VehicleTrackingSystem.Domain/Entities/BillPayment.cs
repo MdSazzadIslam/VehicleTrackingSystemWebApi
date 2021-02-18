@@ -10,6 +10,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class BillPayment : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("BILL_PAYMENT_ID")]
         public int BillPaymentId { get; set; }
 
@@ -31,6 +32,9 @@ namespace VehicleTrackingSystem.Domain.Entities
 
         [Column("PAYMENT_AMOUNT")]
         public double PaymentAmount { get; set; }
+
+        [Column("DELETED")]
+        public bool Deleted { get; set; }
 
 
     }

@@ -9,6 +9,7 @@ namespace VehicleTrackingSystem.Application.Handlers.Expense
     public interface IExpenseService : IDisposable
     {
         public Task<ResultModel> CreateExpense(ExpenseVm expenseVm);
+        public Task<ResultModel> UpdateExpense(UpdateExpenseVm updateExpenseVm);
         public Task<ResultModel> DeleteExpense(int id);
         public Task<IList<ExpenseVm>> GetExpense();
         public Task<ExpenseVm> GetExpenseSubById(int id);

@@ -13,16 +13,12 @@ namespace VehicleTrackingSystem.Application.Handlers.ExpenseType.Commands
     public class CreateExpenseTypeHandler : IRequestHandler<CreateExpenseType, ResultModel>
     {
         private readonly IExpenseTypeService _expenseTypeService;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IDateTime _dateTime;
         private readonly IMapper _mapper;
 
-        public CreateExpenseTypeHandler(IExpenseTypeService expenseService, ICurrentUserService currentUserService, IDateTime dateTime, IMapper mapper)
+        public CreateExpenseTypeHandler(IExpenseTypeService expenseService,  IMapper mapper)
         {
 
             _expenseTypeService = expenseService ?? throw new ArgumentNullException(nameof(_expenseTypeService));
-            _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(_currentUserService));
-            _dateTime = dateTime ?? throw new ArgumentNullException(nameof(_dateTime));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

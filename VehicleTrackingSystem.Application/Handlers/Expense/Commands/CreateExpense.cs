@@ -23,7 +23,7 @@ namespace VehicleTrackingSystem.Application.Handlers.Expense.Commands
             ExpenseSubTypeId = expenseSubTypeId;
             BillingDate = billingDate;
             BillNo = billNo;
-            BillingAmount = BillingAmount;
+            BillingAmount = billingAmount;
             VehicleId = vechicleId;
         }
     }

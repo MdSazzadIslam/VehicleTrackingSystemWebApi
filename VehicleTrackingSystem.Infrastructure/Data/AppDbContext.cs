@@ -41,11 +41,13 @@ namespace VehicleTrackingSystem.Infrastructure.Data
         //public DbSet<Payment> Payment { get; set; }
         //public DbSet<TripRequest> Trip { get; set; }
         //public DbSet<TripHistory> TripHistory { get; set; }
-        public DbSet<Vehicle> Vehicle { get; set; }
-        public DbSet<Expense> Expense { get; set; }
+        public DbSet<Vehicle> VEHICLE { get; set; }
+        public DbSet<Expense> EXPENSE { get; set; }
         public DbSet<ExpenseType> L_EXPENSE_TYPE { get; set; }
         public DbSet<ExpenseSubType> L_EXPENSE_SUB_TYPE { get; set; }
-        public DbSet<Owner> Owner { get; set; }
+        public DbSet<Owner> OWNER { get; set; }
+        public DbSet<VehicleLocation> VEHICLE_LOCATION { get; set; }
+        public DbSet<BillPayment> BILL_PAYMENT { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
@@ -56,6 +58,22 @@ namespace VehicleTrackingSystem.Infrastructure.Data
                         entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.CreateDate = _dateTime.Now;
                         break;
+
+                    case EntityState.Deleted:
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreateDate = _dateTime.Now;
+                        break;
+
+                    case EntityState.Unchanged:
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreateDate = _dateTime.Now;
+                        break;
+
+                    case EntityState.Detached:
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreateDate = _dateTime.Now;
+                        break;
+
                     case EntityState.Modified:
                         entry.Entity.UpdateBy = _currentUserService.UserId;
                         entry.Entity.UpdateDate = _dateTime.Now;

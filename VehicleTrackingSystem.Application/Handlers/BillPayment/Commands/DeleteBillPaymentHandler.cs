@@ -9,7 +9,7 @@ using VehicleTrackingSystem.Application.Common.Models;
 
 namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
 {
-    public class DeleteBillPaymentHandler : IRequestHandler<DeleteBillPayment, Result>
+    public class DeleteBillPaymentHandler : IRequestHandler<DeleteBillPayment, ResultModel>
     {
         private readonly IBillPaymentService _billPaymentService;
         private readonly ICurrentUserService _currentUserService;
@@ -24,7 +24,7 @@ namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
 
         }
 
-        public async Task<Result> Handle(DeleteBillPayment request, CancellationToken cancellationToken)
+        public async Task<ResultModel> Handle(DeleteBillPayment request, CancellationToken cancellationToken)
         {
             var result = await _billPaymentService.DeleteBillPayment(request.Id);
             return result;

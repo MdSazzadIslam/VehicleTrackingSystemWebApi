@@ -10,8 +10,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class Device : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DEVICE_ID")]
-        public Int64 DeviceId { get; set; }
+        public int DeviceId { get; set; }
 
         [Column("DEVICE_NAME")]
         public string DeviceName { get; set; }

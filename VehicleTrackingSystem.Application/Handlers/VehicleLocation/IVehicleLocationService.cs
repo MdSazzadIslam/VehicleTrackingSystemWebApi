@@ -9,9 +9,10 @@ namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation
     public interface IVehicleLocationService : IDisposable
     {
 
-        public Task<Result> CreateVehicleLocation(Domain.Entities.VehicleLocation vehicleLocation);
-        public Task<Result> DeleteVehicleLocation(int id);
-        public Task<IList<Domain.Entities.VehicleLocation>> GetVehicleLocation();
-        public Task<IList<Domain.Entities.VehicleLocation>> GetVehicleLocationById(string searchBy);
+        public Task<ResultModel> CreateVehicleLocation(VehicleLocationVm vehicleLocationVm);
+        public Task<ResultModel> UpdateVehicleLocation(UpdateVehicleLocationVm updateVehicleLocationVm);
+        public Task<ResultModel> DeleteVehicleLocation(int id);
+        public Task<IList<VehicleLocationReturnVm>> GetVehicleLocation();
+        public Task<VehicleLocationReturnVm> GetVehicleLocationById(int id);
     }
 }

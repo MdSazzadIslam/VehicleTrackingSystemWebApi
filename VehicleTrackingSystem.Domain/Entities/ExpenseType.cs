@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using VehicleTrackingSystem.Domain.Common;
@@ -9,6 +10,8 @@ namespace VehicleTrackingSystem.Domain.Entities
     [Table("L_EXPENSE_TYPE")]
     public class ExpenseType : AuditableEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("EXPENSE_TYPE_ID")]
         public int ExpenseTypeId { get; set; }
 

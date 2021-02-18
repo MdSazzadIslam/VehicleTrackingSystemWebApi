@@ -12,12 +12,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("EXPENSE_ID")]
         public int ExpenseId { get; set; }
-
-      
-       
-
         [Column("EXPENSE_TYPE_ID")] // for example 1 for Fuel
         public int ExpenseTypeId { get; set; }
 

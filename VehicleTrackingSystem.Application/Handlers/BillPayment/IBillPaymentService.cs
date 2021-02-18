@@ -8,10 +8,11 @@ namespace VehicleTrackingSystem.Application.Handlers.BillPayment
 {
     public interface IBillPaymentService : IDisposable
     {
-        public Task<Result> CreateBillPayment(Domain.Entities.BillPayment billPayment);
-        public Task<Result> DeleteBillPayment(int id);
-        public Task<IList<Domain.Entities.BillPayment>> GetBillPayment();
-        public Task<IList<Domain.Entities.BillPayment>> GetBillPaymentById(string searchBy);
+        public Task<ResultModel> CreateBillPayment(BillPaymentVm billPaymentVm);
+        public Task<ResultModel> UpdateBillPayment(UpdateBillPaymentVm updateBillPaymentVm);
+        public Task<ResultModel> DeleteBillPayment(int id);
+        public Task<IList<BillPaymentReturnVm>> GetBillPayment();
+        public Task<BillPaymentReturnVm> GetBillPaymentById(int id);
 
     }
 }

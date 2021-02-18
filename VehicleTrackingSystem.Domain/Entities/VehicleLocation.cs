@@ -10,8 +10,9 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class VehicleLocation : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("VEHICLE_LOCATION_ID")]
-        public Int64 VehicleLocationId { get; set; }
+        public int VehicleLocationId { get; set; }
 
         [Column("LATITUDE")]
         public decimal Latitude { get; set; }
@@ -29,17 +30,11 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("SPEED")]
         public decimal? Speed { get; set; }
 
-        [Column("HEADING")]
-        public decimal? Heading { get; set; }
-
         [Column("ALTITUDE")]
         public decimal? Altitude { get; set; }
 
-        [Column("SATELLITES")]
-        public short? Satellites { get; set; }
-
-        [Column("LOCALITY")]
-        public string Locality { get; set; }
+        [Column("DELETED")]
+        public bool Deleted { get; set; }
 
         [Column("VEHICLE_ID")]
         [ForeignKey("VEHICLE_ID")]

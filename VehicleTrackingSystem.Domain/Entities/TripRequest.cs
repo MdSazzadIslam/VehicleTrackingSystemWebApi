@@ -11,6 +11,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class TripRequest : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("TRIP_REQUEST_ID")]
         public Int64 TripRequestId { get; set; }
 

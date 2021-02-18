@@ -52,6 +52,37 @@ namespace VehicleTrackingSystem.WebApi.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateVehicle(UpdateVehicle command, int id)
+        {
+            try
+            {
+                _logger.LogInformation("UpdateVehicle method fired on {date}", DateTime.Now);
+
+                if (id != command.VehicleId)
+                {
+                    _logger.LogError("UpdateVehicle method error. Id not found... on {date}", DateTime.Now);
+
+                    return BadRequest();
+                }
+
+                var result = await _mediator.Send(command);
+                _logger.LogInformation("UpdateVehicle  method task finished on {date}", DateTime.Now);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("UpdateVehicle  method task finished on {date}", DateTime.Now);
+                _logger.LogError($"Error in UpdateVehicle  method: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error in UpdateVehicle  method");
+
+            }
+
+        }
+
+
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {

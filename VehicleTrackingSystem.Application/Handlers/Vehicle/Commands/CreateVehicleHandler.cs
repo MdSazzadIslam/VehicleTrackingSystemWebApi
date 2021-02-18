@@ -14,7 +14,7 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
     {
         private readonly IVehicleService _vehicleService;
         private readonly IMapper _mapper;
-        public CreateVehicleHandler(IVehicleService vehicleService, ICurrentUserService currentUserService, IDateTime dateTime, IMapper mapper)
+        public CreateVehicleHandler(IVehicleService vehicleService, IMapper mapper)
         {
 
             _vehicleService = vehicleService ?? throw new ArgumentNullException(nameof(_vehicleService));

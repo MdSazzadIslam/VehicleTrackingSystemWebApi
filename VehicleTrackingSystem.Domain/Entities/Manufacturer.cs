@@ -11,6 +11,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class Manufacturer : AuditableEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("MANUFACTURER_ID")]
         public Int64 ManufacturerId { get; set; }
 

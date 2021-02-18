@@ -5,12 +5,12 @@ using System.Text;
 
 namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Queries
 {
-    public class GetBillPaymentById : IRequest<IList<Domain.Entities.BillPayment>>
+    public class GetBillPaymentById : IRequest<BillPaymentReturnVm>
     {
-        public string SearchBy { get; set; }
-        public GetBillPaymentById(string searchBy)
+        public int Id { get; set; }
+        public GetBillPaymentById(int id)
         {
-            SearchBy = searchBy;
+            Id = id;
 
         }
 

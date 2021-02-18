@@ -10,6 +10,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     public class TripResponse
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("TRIP_RESPONSE_ID")]
         public Int64 TripResponseId { get; set; }
 

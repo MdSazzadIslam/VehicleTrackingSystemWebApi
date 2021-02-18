@@ -129,6 +129,63 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.ToTable("LoggerEntities");
                 });
 
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.BillPayment", b =>
+                {
+                    b.Property<int>("BillPaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("BILL_PAYMENT_ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BillNo")
+                        .HasColumnType("int")
+                        .HasColumnName("BILL_NO");
+
+                    b.Property<double>("BillingAmount")
+                        .HasColumnType("float")
+                        .HasColumnName("BILLING_AMOUNT");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CREATE_DATE");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float")
+                        .HasColumnName("DISCOUNT_AMOUNT");
+
+                    b.Property<double>("DueAmount")
+                        .HasColumnType("float")
+                        .HasColumnName("DUE_AMOUNT");
+
+                    b.Property<double>("PaymentAmount")
+                        .HasColumnType("float")
+                        .HasColumnName("PAYMENT_AMOUNT");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("BILLING_DATE");
+
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
+                        .HasColumnName("UPDATE_BY");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UPDATE_DATE");
+
+                    b.HasKey("BillPaymentId");
+
+                    b.ToTable("BILL_PAYMENT");
+                });
+
             modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.Expense", b =>
                 {
                     b.Property<int>("ExpenseId")
@@ -329,7 +386,7 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.HasIndex("VehicleId")
                         .IsUnique();
 
-                    b.ToTable("Owner");
+                    b.ToTable("OWNER");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.UrlAction", b =>
@@ -430,6 +487,72 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.HasKey("VehicleId");
 
                     b.ToTable("VEHICLE");
+                });
+
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.VehicleLocation", b =>
+                {
+                    b.Property<int>("VehicleLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("VEHICLE_LOCATION_ID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("Altitude")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("ALTITUDE");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CREATE_DATE");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("CREATE_BY");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("DELETED");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("LATITUDE");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("LONGITUDE");
+
+                    b.Property<decimal?>("Speed")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("SPEED");
+
+                    b.Property<DateTime>("TripDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("TRIP_DATE");
+
+                    b.Property<string>("TripTime")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TRIP_TIME");
+
+                    b.Property<int>("UpdateBy")
+                        .HasColumnType("int")
+                        .HasColumnName("UPDATE_BY");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UPDATE_DATE");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("VEHICLE_ID");
+
+                    b.Property<int?>("VehicleId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("VehicleLocationId");
+
+                    b.HasIndex("VehicleId1");
+
+                    b.ToTable("VEHICLE_LOCATION");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Infrastructure.Identity.Role", b =>
@@ -598,6 +721,15 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .HasForeignKey("VehicleTrackingSystem.Domain.Entities.Owner", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VehicleTrackingSystem.Domain.Entities.VehicleLocation", b =>
+                {
+                    b.HasOne("VehicleTrackingSystem.Domain.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId1");
+
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("VehicleTrackingSystem.Infrastructure.Identity.UserRole", b =>

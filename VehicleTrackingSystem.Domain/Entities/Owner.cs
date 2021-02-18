@@ -10,7 +10,7 @@ namespace VehicleTrackingSystem.Domain.Entities
     {
 
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("OWNER_ID")]
         public Int64 OwnerId { get; set; }
 

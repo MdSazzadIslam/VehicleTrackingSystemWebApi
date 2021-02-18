@@ -37,38 +37,96 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
         public async Task<ResultModel> CreateExpense(ExpenseVm expenseVm)
         {
-            var entity = new Expense
+            try
             {
-                ExpenseId = expenseVm.ExpenseId,
-                ExpenseTypeId = expenseVm.ExpenseTypeId,
-                ExpenseSubTypeId = expenseVm.ExpenseSubTypeId,
-                BillNo = expenseVm.BillNo,
-                Quantity = expenseVm.Quantity,
-                BillingDate = expenseVm.BillingDate,
-                BillingAmount = expenseVm.BillingAmount,
-                VehicleId = expenseVm.VehicleId,
+                var entity = new Expense
+                {
 
-                UpdateBy = _currentUserService.UserId,
-                UpdateDate = _dateTime.Now,
-                CreatedBy = _currentUserService.UserId,
-                CreateDate = _dateTime.Now,
-            };
+                    ExpenseTypeId = expenseVm.ExpenseTypeId,
+                    ExpenseSubTypeId = expenseVm.ExpenseSubTypeId,
+                    BillNo = expenseVm.BillNo,
+                    Quantity = expenseVm.Quantity,
+                    BillingDate = expenseVm.BillingDate,
+                    BillingAmount = expenseVm.BillingAmount,
+                    VehicleId = expenseVm.VehicleId,
 
-            await _context.Expense.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            return new ResultModel
+ 
+                    CreatedBy = _currentUserService.UserId,
+                    CreateDate = _dateTime.Now,
+                };
+
+                await _context.EXPENSE.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return new ResultModel
+                {
+                    Result = true,
+                    Message = NotificationConfig.InsertSuccessMessage($"{expenseVm.BillNo}"),
+                    Id = entity.ExpenseId.ToString()
+                };
+            }
+            catch(Exception)
             {
-                Result = true,
-                Message = NotificationConfig.InsertSuccessMessage($"{expenseVm.BillNo}"),
-                Id = entity.ExpenseTypeId.ToString()
-            };
+                return new ResultModel { Result = false, Message = NotificationConfig.InsertErrorMessage($"{expenseVm.BillNo}") };
+            }
+           
         }
+
+        public async Task<ResultModel> UpdateExpense(UpdateExpenseVm updateExpenseVm)
+        {
+            try
+            {
+                var VehicleLocationId = await _context.EXPENSE.FirstOrDefaultAsync(x => x.ExpenseId == updateExpenseVm.ExpenseId && !x.Deleted);
+                if (VehicleLocationId != null)
+                {
+
+                    var entity = new Expense
+                    {
+
+                        ExpenseTypeId = updateExpenseVm.ExpenseTypeId,
+                        ExpenseSubTypeId = updateExpenseVm.ExpenseSubTypeId,
+                        BillNo = updateExpenseVm.BillNo,
+                        Quantity = updateExpenseVm.Quantity,
+                        BillingDate = updateExpenseVm.BillingDate,
+                        BillingAmount = updateExpenseVm.BillingAmount,
+                        VehicleId = updateExpenseVm.VehicleId,
+
+                        UpdateBy = _currentUserService.UserId,
+                        UpdateDate = _dateTime.Now,
+
+                    };
+
+                    _context.EXPENSE.Update(entity);
+                    await _context.SaveChangesAsync();
+                    return new ResultModel
+                    {
+                        Result = true,
+                        Message = NotificationConfig.UpdateSuccessMessage($"{updateExpenseVm.BillNo}"),
+                        Id = entity.ExpenseId.ToString()
+                    };
+                }
+
+
+                else
+                {
+                    return new ResultModel { Result = false, Message = NotificationConfig.NotFoundMessage($"{updateExpenseVm.BillNo} ") };
+
+                }
+
+            }
+
+            catch (Exception)
+            {
+                return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateExpenseVm.BillNo}") };
+            }
+
+        }
+
 
         public async Task<ResultModel> DeleteExpense(int id)
         {
             if (id > 0)
             {
-                var entity = await _context.Expense.FirstOrDefaultAsync(x => x.ExpenseId == id && x.Deleted == false);
+                var entity = await _context.EXPENSE.FirstOrDefaultAsync(x => x.ExpenseId == id && x.Deleted == false);
                 if (entity != null)
                 {
                     entity.Deleted = true;
@@ -90,14 +148,14 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
         public async Task<IList<ExpenseVm>> GetExpense()
         {
-            var entity = await _context.Expense.Where(x => x.Deleted == false).ToListAsync();
+            var entity = await _context.EXPENSE.Where(x => x.Deleted == false).ToListAsync();
             var data = _mapper.Map<IList<ExpenseVm>>(entity);
             return data;
         }
 
         public async Task<ExpenseVm> GetExpenseSubById(int id)
         {
-            var entity = await _context.Expense.FirstOrDefaultAsync(x => x.ExpenseSubTypeId == id && !x.Deleted);
+            var entity = await _context.EXPENSE.FirstOrDefaultAsync(x => x.ExpenseSubTypeId == id && !x.Deleted);
             var data = _mapper.Map<ExpenseVm>(entity);
             return data;
         }
