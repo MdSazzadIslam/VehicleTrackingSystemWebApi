@@ -111,7 +111,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateVehicleLocationVm.VehicleId}") };
