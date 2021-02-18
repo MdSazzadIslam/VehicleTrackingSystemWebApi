@@ -77,6 +77,8 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
         public async Task<ResultModel> UpdateVehicleLocation(UpdateVehicleLocationVm updateVehicleLocationVm)
         {
+
+
             try
             {
                 var VehicleLocationId = await _context.VEHICLE_LOCATION.FirstOrDefaultAsync(x => x.VehicleLocationId == updateVehicleLocationVm.VehicleLocationId && !x.Deleted);
@@ -84,7 +86,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
                 {
                     var entity = new Domain.Entities.VehicleLocation
                     {
-
+                        VehicleLocationId = updateVehicleLocationVm.VehicleLocationId,
                         Latitude = updateVehicleLocationVm.Latitude,
                         Longitude = updateVehicleLocationVm.Longitude,
                         TripDate = updateVehicleLocationVm.TripDate,
@@ -109,7 +111,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
             }
 
-            catch (Exception)
+            catch (Exception e)
             {
 
                 return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateVehicleLocationVm.VehicleId}") };

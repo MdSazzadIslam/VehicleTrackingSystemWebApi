@@ -20,7 +20,6 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle
         public string CountryCode { get; set; }
         public string Remarks { get; set; }
         public char ActiveStatus { get; set; }
-        public string ImageName { get; set; }
         public virtual Owner Owner { get; set; }
 
     }

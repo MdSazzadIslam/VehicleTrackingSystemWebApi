@@ -23,7 +23,7 @@ namespace VehicleTrackingSystem.Application.Handlers.VehicleLocation.Commands
             VehicleLocationId = vehicleLocationId;
             Latitude = latitude;
             Longitude = longitude;
-            tripDate = TripDate;
+            TripDate = tripDate;
             TripTime = tripTime;
             Speed = speed;
             Altitude = altitude;

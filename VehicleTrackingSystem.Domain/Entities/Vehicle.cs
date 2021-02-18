@@ -47,9 +47,6 @@ namespace VehicleTrackingSystem.Domain.Entities
         [Column("ACTIVE_STATUS")]
         public char ActiveStatus { get; set; }
 
-        [Column("IMAGE_NAME")]
-        public string ImageName { get; set; }
-
         [Column("DELETED")]
         public bool Deleted { get; set; }
 

@@ -21,9 +21,8 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
         public string CountryCode { get; set; }
         public string Remarks { get; set; }
         public char ActiveStatus { get; set; }
-        public string ImageName { get; set; }
         public Owner Owner { get; set; }
-        public UpdateVehicle(int vehicleId, string vehicleName, int manufacturerId, string chassisNo, string modelNo, string colorCode, int productionYear, int registratinYear, int engineeCC, string countryCode, string remarks, string imageName, char activeStatus, Owner owner)
+        public UpdateVehicle(int vehicleId, string vehicleName, int manufacturerId, string chassisNo, string modelNo, string colorCode, int productionYear, int registratinYear, int engineeCC, string countryCode, string remarks, char activeStatus, Owner owner)
         {
             VehicleId = vehicleId;
             VehicleName = vehicleName;
@@ -38,7 +37,6 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
             Remarks = remarks;
             ActiveStatus = activeStatus;
             Owner = owner;
-            ImageName = imageName;
 
         }
 
