@@ -9,7 +9,6 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
 {
     public class CreateVehicle : IRequest<ResultModel>
     {
-        public int VehicleId { get; set; }
         public string VehicleName { get; set; }
         public int ManufacturerId { get; set; }
         public string ChassisNo { get; set; }
@@ -24,7 +23,7 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle.Commands
         public Owner Owner { get; set; }
         public CreateVehicle(int vehicleId, string vehicleName, int ManufacturerId, string chassisNo, string modelNo, string colorCode, int productionYear, int registratinYear,int engineeCC, string countryCode, string remarks, char activeStatus, Owner owner)
         {
-            VehicleId = vehicleId;
+
             VehicleName = vehicleName;
             ChassisNo = chassisNo;
             ModelNo = modelNo;

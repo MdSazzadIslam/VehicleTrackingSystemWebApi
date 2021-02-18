@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using VehicleTrackingSystem.Application.Common.Interfaces;
 using VehicleTrackingSystem.Application.Common.Models;
 using VehicleTrackingSystem.Application.Handlers.ExpenseSubType;
-using VehicleTrackingSystem.Application.Handlers.ExpenseType;
 using VehicleTrackingSystem.Domain.Entities;
 using VehicleTrackingSystem.Infrastructure.Data;
 using VehicleTrackingSystem.Infrastructure.Utils;
@@ -72,12 +70,12 @@ namespace VehicleTrackingSystem.Infrastructure.Services
         {
             try
             {
-                var VehicleLocationId = await _context.L_EXPENSE_SUB_TYPE.FirstOrDefaultAsync(x => x.ExpenseSubTypeId == updateExpenseSubTypeVm.ExpenseSubTypeId && !x.Deleted);
-                if (VehicleLocationId != null)
-                {
 
+                if (updateExpenseSubTypeVm.ExpenseSubTypeId > 0)
+                {
                     var entity = new ExpenseSubType
                     {
+                        ExpenseSubTypeId = updateExpenseSubTypeVm.ExpenseSubTypeId,
                         ExpenseTypeId = updateExpenseSubTypeVm.ExpenseTypeId,
                         ExpenseSubTypeName = updateExpenseSubTypeVm.ExpenseSubTypeName,
 

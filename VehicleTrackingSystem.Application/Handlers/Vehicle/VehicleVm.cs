@@ -6,7 +6,6 @@ namespace VehicleTrackingSystem.Application.Handlers.Vehicle
 {
     public class VehicleVm : IMapFrom<CreateVehicle>
     {
-        public int VehicleId { get; set; }
         public string VehicleName { get; set; }
         public int ManufacturerId { get; set; }
         public string ChassisNo { get; set; }

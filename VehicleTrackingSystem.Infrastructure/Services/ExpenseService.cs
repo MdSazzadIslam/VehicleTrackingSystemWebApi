@@ -75,13 +75,12 @@ namespace VehicleTrackingSystem.Infrastructure.Services
         {
             try
             {
-                var VehicleLocationId = await _context.EXPENSE.FirstOrDefaultAsync(x => x.ExpenseId == updateExpenseVm.ExpenseId && !x.Deleted);
-                if (VehicleLocationId != null)
+                if (updateExpenseVm.ExpenseId > 0)
                 {
 
                     var entity = new Expense
                     {
-
+                        ExpenseId = updateExpenseVm.ExpenseId,
                         ExpenseTypeId = updateExpenseVm.ExpenseTypeId,
                         ExpenseSubTypeId = updateExpenseVm.ExpenseSubTypeId,
                         BillNo = updateExpenseVm.BillNo,

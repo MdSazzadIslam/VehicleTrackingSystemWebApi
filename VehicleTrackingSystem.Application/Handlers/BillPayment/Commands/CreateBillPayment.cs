@@ -8,7 +8,6 @@ namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
 {
     public class CreateBillPayment : IRequest<ResultModel>
     {
-        public int BillPaymentId { get; set; }
         public int BillNo { get; set; }
         public DateTime PaymentDate { get; set; }
         public double BillingAmount { get; set; }
@@ -16,9 +15,9 @@ namespace VehicleTrackingSystem.Application.Handlers.BillPayment.Commands
         public double DueAmount { get; set; }
         public double PaymentAmount { get; set; }
 
-        public CreateBillPayment(int billPaymentId, int billNo, DateTime paymentDate, double billingAmount, double discountAmount, double dueAmount, double paymentAmount)
+        public CreateBillPayment(int billNo, DateTime paymentDate, double billingAmount, double discountAmount, double dueAmount, double paymentAmount)
         {
-            BillPaymentId = billPaymentId;
+          
             BillNo = billNo;
             PaymentDate = paymentDate;
             BillingAmount = billingAmount;

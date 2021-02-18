@@ -57,7 +57,6 @@ namespace VehicleTrackingSystem.Infrastructure.Services
                 var entity = new  Vehicle
                 {
 
-                    VehicleId = vehicleVm.VehicleId,
                     VehicleName = vehicleVm.VehicleName,
                     ChassisNo = vehicleVm.ChassisNo,
                     ModelNo = vehicleVm.ModelNo,
@@ -84,7 +83,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
                 var data = new Owner
                 {
-                    OwnerId = vehicleVm.Owner.OwnerId,
+
                     OwnerName = vehicleVm.Owner.OwnerName,
                     VehicleId = entity.VehicleId,
                     JoiningDate = vehicleVm.Owner.JoiningDate,
@@ -134,8 +133,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
             try
             {
 
-                var VehicleLocationId = await _context.VEHICLE.FirstOrDefaultAsync(x => x.VehicleId == updateVehicleVm.VehicleId && !x.Deleted);
-                if (VehicleLocationId != null)
+                if (updateVehicleVm.VehicleId > 0)
                 {
 
 

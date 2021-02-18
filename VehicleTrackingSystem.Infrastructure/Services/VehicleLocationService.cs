@@ -74,60 +74,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
 
         }
 
-
-        //public async Task<ResultModel> UpdateVehicleLocation(UpdateVehicleLocationVm updateVehicleLocationVm)
-        //{
-
-
-        //    try
-        //    {
-        //        var entity = await _context.VEHICLE_LOCATION.FirstOrDefaultAsync(x => x.VehicleLocationId == updateVehicleLocationVm.VehicleLocationId && !x.Deleted);
-        //        if (entity != null)
-        //        {
-        //            //var entity = new Domain.Entities.VehicleLocation
-        //            //{
-        //            //    VehicleLocationId = updateVehicleLocationVm.VehicleLocationId,
-        //            //    Latitude = updateVehicleLocationVm.Latitude,
-        //            //    Longitude = updateVehicleLocationVm.Longitude,
-        //            //    TripDate = updateVehicleLocationVm.TripDate,
-        //            //    TripTime = updateVehicleLocationVm.TripTime,
-        //            //    Speed = updateVehicleLocationVm.Speed,
-        //            //    Altitude = updateVehicleLocationVm.Altitude,
-        //            //    VehicleId = updateVehicleLocationVm.VehicleId
-
-        //            //};
-
-        //            entity.Latitude = updateVehicleLocationVm.Latitude;
-        //            entity.Longitude = updateVehicleLocationVm.Longitude;
-        //            entity.TripDate = updateVehicleLocationVm.TripDate;
-        //            entity.TripTime = updateVehicleLocationVm.TripTime;
-        //            entity.Speed = updateVehicleLocationVm.Speed;
-        //            entity.Altitude = updateVehicleLocationVm.Altitude;
-        //            entity.VehicleId = updateVehicleLocationVm.VehicleId;
-
-
-        //            //_context.VEHICLE_LOCATION.Update(entity);
-        //            await _context.SaveChangesAsync();
-        //            return new ResultModel { Result = true, Message = NotificationConfig.UpdateSuccessMessage($"{updateVehicleLocationVm.VehicleId}"), Id = entity.VehicleLocationId.ToString() };
-
-        //        }
-        //        else
-        //        {
-        //            return new ResultModel { Result = false, Message = NotificationConfig.NotFoundMessage($"{updateVehicleLocationVm.VehicleId} information") };
-        //        }
-
-
-        //    }
-
-        //    catch (Exception e)
-        //    {
-
-        //        return new ResultModel { Result = false, Message = NotificationConfig.UpdateErrorMessage($"{updateVehicleLocationVm.VehicleId}") };
-
-        //    }
-        //}
-
-
+ 
         public async Task<ResultModel> UpdateVehicleLocation(UpdateVehicleLocationVm updateVehicleLocationVm)
         {
             try

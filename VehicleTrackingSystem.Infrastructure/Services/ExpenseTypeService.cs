@@ -69,11 +69,12 @@ namespace VehicleTrackingSystem.Infrastructure.Services
         {
             try
             {
-                var VehicleLocationId = await _context.L_EXPENSE_TYPE.FirstOrDefaultAsync(x => x.ExpenseTypeId == updateExpenseTypeVm.ExpenseTypeId && !x.Deleted);
-                if (VehicleLocationId != null)
+                if (updateExpenseTypeVm.ExpenseTypeId > 0)
                 {
+
                     var entity = new ExpenseType
                     {
+                        ExpenseTypeId = updateExpenseTypeVm.ExpenseTypeId,
                         ExpenseTypeName = updateExpenseTypeVm.ExpenseTypeName,
 
                         UpdateBy = _currentUserService.UserId,
@@ -86,7 +87,7 @@ namespace VehicleTrackingSystem.Infrastructure.Services
                     return new ResultModel
                     {
                         Result = true,
-                        Message = NotificationConfig.InsertSuccessMessage($"{updateExpenseTypeVm.ExpenseTypeName}"),
+                        Message = NotificationConfig.UpdateSuccessMessage($"{updateExpenseTypeVm.ExpenseTypeName}"),
                         Id = entity.ExpenseTypeId.ToString()
                     };
 

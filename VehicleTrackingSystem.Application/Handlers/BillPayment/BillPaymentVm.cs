@@ -8,7 +8,6 @@ namespace VehicleTrackingSystem.Application.Handlers.BillPayment
 {
     public class BillPaymentVm : IMapFrom<CreateBillPayment>
     {
-        public int BillPaymentId { get; set; }
         public int BillNo { get; set; }
         public DateTime PaymentDate { get; set; }
         public double BillingAmount { get; set; }

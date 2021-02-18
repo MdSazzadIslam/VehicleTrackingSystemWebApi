@@ -8,7 +8,6 @@ namespace VehicleTrackingSystem.Application.Handlers.ExpenseType
 {
     public class ExpenseTypeVm : IMapFrom<CreateExpenseType>
     {
-        public int ExpenseTypeId { get; set; }
         public string ExpenseTypeName { get; set; }
 
     }

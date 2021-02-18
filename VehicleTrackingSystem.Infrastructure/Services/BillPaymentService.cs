@@ -81,14 +81,13 @@ namespace VehicleTrackingSystem.Infrastructure.Services
         {
             try
             {
-                var VehicleLocationId = await _context.BILL_PAYMENT.FirstOrDefaultAsync(x => x.BillPaymentId == updateBillPaymentVm.BillPaymentId && !x.Deleted);
-                if (VehicleLocationId != null)
+                if (updateBillPaymentVm.BillPaymentId > 0)
                 {
 
                     var entity = new BillPayment
                     {
 
-
+                        BillPaymentId = updateBillPaymentVm.BillPaymentId,
                         BillNo = updateBillPaymentVm.BillNo,
                         PaymentDate = updateBillPaymentVm.PaymentDate,
                         BillingAmount = updateBillPaymentVm.PaymentAmount,

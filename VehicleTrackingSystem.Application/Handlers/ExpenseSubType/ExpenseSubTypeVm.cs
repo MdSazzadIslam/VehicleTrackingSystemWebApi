@@ -9,7 +9,6 @@ namespace VehicleTrackingSystem.Application.Handlers.ExpenseSubType
 {
     public class ExpenseSubTypeVm : IMapFrom<CreateExpenseSubType>
     {
-        public int ExpenseSubTypeId { get; set; }
         public string ExpenseSubTypeName { get; set; }
         public int ExpenseTypeId { get; set; }
 
