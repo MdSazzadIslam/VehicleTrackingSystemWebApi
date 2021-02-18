@@ -23,6 +23,7 @@ namespace Emarket.WebApi.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginUser command)
@@ -46,9 +47,9 @@ namespace Emarket.WebApi.Controllers
         }
 
 
-   
-        [HttpPost("register")]
         [AllowAnonymous]
+        [HttpPost("register")]
+        
         public async Task<IActionResult> Register(RegisterUser command)
         {
             var result = await _mediator.Send(command);

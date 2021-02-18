@@ -29,7 +29,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
         }
 
 
-        [AllowAnonymous]
+        
         [HttpPost]
         public async Task<IActionResult> CreateVehicle(CreateVehicle command)
         {
@@ -51,7 +51,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpPut]
         public async Task<IActionResult> UpdateVehicle(UpdateVehicle command, int id)
         {
@@ -82,7 +82,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
         }
 
 
-        [AllowAnonymous]
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
@@ -104,7 +104,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpGet]
         public async Task<IActionResult> GetVehicle()
         {
@@ -126,7 +126,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicleById(int id)
         {

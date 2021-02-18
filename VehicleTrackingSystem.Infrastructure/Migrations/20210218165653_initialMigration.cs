@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VehicleTrackingSystem.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,7 +183,6 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     COUNTRY_CODE = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     REMARKS = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ACTIVE_STATUS = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    IMAGE_NAME = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DELETED = table.Column<bool>(type: "bit", nullable: false),
                     CREATE_BY = table.Column<int>(type: "int", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: false),

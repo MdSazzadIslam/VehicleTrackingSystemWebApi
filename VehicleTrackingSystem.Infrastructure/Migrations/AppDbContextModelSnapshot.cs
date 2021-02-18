@@ -448,10 +448,6 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ENGINE_CC");
 
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("IMAGE_NAME");
-
                     b.Property<long>("ManufacturerId")
                         .HasColumnType("bigint")
                         .HasColumnName("MANUFACTURER_ID");

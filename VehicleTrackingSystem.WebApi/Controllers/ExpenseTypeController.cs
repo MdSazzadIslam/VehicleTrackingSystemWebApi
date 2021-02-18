@@ -29,7 +29,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpPost]
         public async Task<IActionResult> CreateExpenseType(CreateExpenseType command)
         {
@@ -51,7 +51,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpPut]
         public async Task<IActionResult> UpdateExpenseType(UpdateExpenseType command, int id)
         {
@@ -81,7 +81,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExpenseType(int id)
         {
@@ -103,7 +103,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpGet]
         public async Task<IActionResult> GetExpenseType()
         {
@@ -124,7 +124,7 @@ namespace VehicleTrackingSystem.WebApi.Controllers
             }
 
         }
-        [AllowAnonymous]
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExpenseTypeById(int id)
         {

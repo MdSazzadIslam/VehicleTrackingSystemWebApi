@@ -10,8 +10,8 @@ using VehicleTrackingSystem.Infrastructure.Data;
 namespace VehicleTrackingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210218081211_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210218165653_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -449,10 +449,6 @@ namespace VehicleTrackingSystem.Infrastructure.Migrations
                     b.Property<int>("EngineCC")
                         .HasColumnType("int")
                         .HasColumnName("ENGINE_CC");
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("IMAGE_NAME");
 
                     b.Property<long>("ManufacturerId")
                         .HasColumnType("bigint")
